@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import Header from '../components/Header';
 
 export default class Search extends Component {
   render() {
     return (
-      <div data-testid="page-search"> 🚧 SEARCH EM CONSTRUÇÂO 🚧 </div>
+      <div data-testid="page-search">
+        <Header />
+        🚧 SEARCH EM CONSTRUÇÂO 🚧
+      </div>
     );
   }
 }
