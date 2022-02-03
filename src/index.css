@@ -92,6 +92,11 @@ code {
   background-color: #0b6bc0;
 }
 
+.login-button:disabled {
+  background-color: gray;
+  cursor: default;
+}
+
 .login-title {
   text-align: center;
   margin-bottom: 60px;
