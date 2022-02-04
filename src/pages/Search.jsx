@@ -10,7 +10,7 @@ export default class Search extends Component {
   handdleChange = ({ target }) => {
     this.setState({
       searchValue: target.value,
-      buttonDisabled: target.value < 2,
+      buttonDisabled: target.value.length < 2,
     });
   }
 
