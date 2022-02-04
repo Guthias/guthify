@@ -38,6 +38,7 @@ export default class Search extends Component {
               />
               <button
                 type="submit"
+                data-testid="search-artist-button"
                 className="button-input"
                 disabled={ buttonDisabled }
               >
