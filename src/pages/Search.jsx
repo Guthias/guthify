@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
+import Album from '../components/Album';
 
 export default class Search extends Component {
   state = {
     searchValue: '',
     buttonDisabled: true,
-    albuns: [],
+    albums: [],
   }
 
   handdleChange = ({ target }) => {
@@ -25,11 +26,11 @@ export default class Search extends Component {
     event.preventDefault();
     const { searchValue } = this.state;
     const response = await searchAlbumsAPI(searchValue);
-    this.setState({ albuns: response });
+    this.setState({ albums: response });
   }
 
   render() {
-    const { searchValue, buttonDisabled } = this.state;
+    const { searchValue, buttonDisabled, albums } = this.state;
 
     return (
       <div data-testid="page-search">
@@ -56,6 +57,10 @@ export default class Search extends Component {
               </button>
             </div>
           </form>
+
+          <div className="album-list">
+            { albums.map((album) => <Album key={ album.collectionId } { ...album } />) }
+          </div>
         </main>
       </div>
     );
