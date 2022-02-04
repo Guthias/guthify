@@ -191,3 +191,37 @@ code {
   border-radius: 50%;
   object-fit: cover;
 }
+
+.search-area {
+  border: 3px solid #147fdd;
+  width: 40%;
+  border-radius: 8px;
+  display: flex;
+  margin: 60px auto 0 auto;
+}
+
+.search-input {
+  font-size: 18px;
+  width: 100%;
+  padding: 10px 15px;
+  outline: none;
+  border: none;
+  background: none;
+  color: white;
+}
+
+.button-input {
+  background-color: #147fdd;
+  color: white;
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  padding: 0 20px;
+  transition: all ease-in-out 0.2s;
+}
+
+.button-input:hover {
+  background-color: #0d518d;
+}

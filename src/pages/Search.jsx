@@ -15,7 +15,7 @@ export default class Search extends Component {
                 data-testid="search-artist-input"
                 placeHolder="Pesquisar por um artista"
               />
-              <button type="submit">Pesquisar</button>
+              <button type="submit" className="button-input">Search</button>
             </div>
           </form>
         </main>
