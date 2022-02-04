@@ -234,3 +234,48 @@ code {
 .button-input:disabled {
   background-color: #808080;
 }
+
+.album-list {
+  width: 80%;
+  margin: 40px auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-evenly;
+}
+
+.album-list a {
+  text-decoration: none;
+}
+
+.album {
+  text-decoration: none;
+  width: 200px;
+}
+
+.album-image-area {
+  width: 200px;
+  height: 200px;
+}
+
+.album-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.album-status-area {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  margin-top: 10px;
+}
+
+.album-name {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.album-artist-name {
+  font-size: 14px;
+  color: #ececec;
+}

@@ -9,7 +9,6 @@ export default class Album extends Component {
       collectionId,
       collectionName,
       artworkUrl100,
-      trackCount,
     } = this.props;
 
     return (
@@ -22,10 +21,6 @@ export default class Album extends Component {
           <div className="album-status-area">
             <span className="album-name">{ collectionName }</span>
             <span className="album-artist-name">{ artistName }</span>
-            <span className="album-release-date">
-              { trackCount }
-              Songs
-            </span>
           </div>
         </div>
       </Link>
@@ -38,5 +33,4 @@ Album.propTypes = {
   collectionId: Prototypes.number.isRequired,
   collectionName: Prototypes.string.isRequired,
   artworkUrl100: Prototypes.string.isRequired,
-  trackCount: Prototypes.number.isRequired,
 };
