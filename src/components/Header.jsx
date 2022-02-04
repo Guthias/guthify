@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
+import Loading from './Loading';
 
 export default class Header extends Component {
   state = {
     userName: '',
+    loading: true,
   }
 
   async componentDidMount() {
     const userRequest = await getUser();
-
-    this.setState({ userName: userRequest.name });
+    this.setState({
+      userName: userRequest.name,
+      loading: false,
+    });
   }
 
-  render() {
+  renderHeader = () => {
     const { userName } = this.state;
     return (
       <header data-testid="header-component" className="header">
@@ -30,6 +34,14 @@ export default class Header extends Component {
           <span data-testid="header-user-name">{ userName }</span>
         </div>
       </header>
+    );
+  }
+
+  render() {
+    const { loading } = this.state;
+
+    return (
+      loading ? <Loading /> : this.renderHeader()
     );
   }
 }
