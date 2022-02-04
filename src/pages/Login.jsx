@@ -9,6 +9,7 @@ export default class Login extends Component {
     userNameInput: '',
     buttonDisabled: true,
     loading: false,
+    redirect: false,
   }
 
   handleChange = ({ target }) => {
@@ -24,7 +25,10 @@ export default class Login extends Component {
     const { userNameInput: name } = this.state;
     this.setState({ loading: true });
     await createUser(({ name }));
-    this.setState({ loading: false });
+    this.setState({
+      loading: false,
+      redirect: true,
+    });
   }
 
   renderForm = () => {
@@ -58,8 +62,9 @@ export default class Login extends Component {
   }
 
   render() {
+    const { redirect } = this.state;
     return (
-      this.renderForm()
+      redirect ? <Redirect to="/search" /> : this.renderForm()
     );
   }
 }
