@@ -14,6 +14,11 @@ export default class Search extends Component {
     });
   }
 
+  disabledClass = () => {
+    const { buttonDisabled } = this.state;
+    return buttonDisabled && 'disabled';
+  }
+
   render() {
     const { searchValue, buttonDisabled } = this.state;
 
@@ -22,14 +27,14 @@ export default class Search extends Component {
         <Header />
         <main className="page-content">
           <form>
-            <div className="search-area">
+            <div className={ `search-area ${this.disabledClass()}` }>
               <input
                 type="text"
                 className="search-input"
                 value={ searchValue }
                 onChange={ this.handdleChange }
                 data-testid="search-artist-input"
-                placeHolder="Pesquisar por um artista"
+                placeholder="Pesquisar por um artista"
               />
               <button
                 type="submit"

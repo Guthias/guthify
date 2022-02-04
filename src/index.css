@@ -198,6 +198,11 @@ code {
   border-radius: 8px;
   display: flex;
   margin: 60px auto 0 auto;
+  transition: ease-in-out 0.2s all;
+}
+
+.search-area.disabled {
+  border-color: #808080;
 }
 
 .search-input {
@@ -224,4 +229,8 @@ code {
 
 .button-input:hover {
   background-color: #0d518d;
+}
+
+.button-input:disabled {
+  background-color: #808080;
 }
