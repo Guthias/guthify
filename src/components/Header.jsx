@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { getUser } from '../services/userAPI';
 
 export default class Header extends Component {
+  state = {
+    userName: '',
+  }
+
+  async componentDidMount() {
+    const userRequest = await getUser();
+
+    this.setState({ userName: userRequest.name });
+  }
+
   render() {
+    const { userName } = this.state;
     return (
       <header data-testid="header-component" className="header">
         <div className="header-title-area">Guthify</div>
@@ -15,7 +27,7 @@ export default class Header extends Component {
           <div className="header-user-image-area">
             <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" className="header-user-image" alt="Foto de Perfil" />
           </div>
-          <span data-testid="header-user-name">usuario</span>
+          <span data-testid="header-user-name">{ userName }</span>
         </div>
       </header>
     );
