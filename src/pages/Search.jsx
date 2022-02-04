@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
+import searchAlbumsAPI from '../services/searchAlbumsAPI';
 
 export default class Search extends Component {
   state = {
     searchValue: '',
     buttonDisabled: true,
+    albuns: [],
   }
 
   handdleChange = ({ target }) => {
@@ -17,6 +19,13 @@ export default class Search extends Component {
   disabledClass = () => {
     const { buttonDisabled } = this.state;
     return buttonDisabled && 'disabled';
+  }
+
+  searchAlbums = async (event) => {
+    event.preventDefault();
+    const { searchValue } = this.state;
+    const response = await searchAlbumsAPI(searchValue);
+    this.setState({ albuns: response });
   }
 
   render() {
@@ -39,6 +48,7 @@ export default class Search extends Component {
               <button
                 type="submit"
                 data-testid="search-artist-button"
+                onClick={ this.searchAlbums }
                 className="button-input"
                 disabled={ buttonDisabled }
               >
