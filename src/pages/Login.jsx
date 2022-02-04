@@ -50,6 +50,7 @@ export default class Login extends Component {
             <button
               type="submit"
               className="login-button"
+              data-testid="login-submit-button"
               onClick={ this.loginSubmit }
               disabled={ buttonDisabled }
             >
