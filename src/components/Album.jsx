@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Prototypes from 'prop-types';
 
 export default class Album extends Component {
   render() {
@@ -31,3 +32,11 @@ export default class Album extends Component {
     );
   }
 }
+
+Album.propTypes = {
+  artistName: Prototypes.string.isRequired,
+  collectionId: Prototypes.number.isRequired,
+  collectionName: Prototypes.string.isRequired,
+  artworkUrl100: Prototypes.string.isRequired,
+  trackCount: Prototypes.number.isRequired,
+};
