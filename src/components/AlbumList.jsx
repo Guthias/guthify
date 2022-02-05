@@ -6,9 +6,12 @@ export default class AlbumList extends Component {
   render() {
     const { albums } = this.props;
     return (
-      <div className="album-list">
-        { albums.map((album) => <Album key={ album.collectionId } { ...album } />) }
-      </div>
+      albums.length === 0 ? <p>Nenhum álbum foi encontrado</p>
+        : (
+          <div className="album-list">
+            { albums.map((album) => <Album key={ album.collectionId } { ...album } />) }
+          </div>
+        )
     );
   }
 }

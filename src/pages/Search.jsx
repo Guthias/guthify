@@ -8,6 +8,7 @@ export default class Search extends Component {
     searchValue: '',
     buttonDisabled: true,
     albums: [],
+    isLoading: false,
   }
 
   handdleChange = ({ target }) => {
@@ -24,13 +25,14 @@ export default class Search extends Component {
 
   searchAlbums = async (event) => {
     event.preventDefault();
+    this.setState({ isLoading: true });
     const { searchValue } = this.state;
     const response = await searchAlbumsAPI(searchValue);
-    this.setState({ albums: response });
+    this.setState({ albums: response, isLoading: false });
   }
 
   render() {
-    const { searchValue, buttonDisabled, albums } = this.state;
+    const { searchValue, buttonDisabled, albums, isLoading } = this.state;
 
     return (
       <div data-testid="page-search">
@@ -57,8 +59,7 @@ export default class Search extends Component {
               </button>
             </div>
           </form>
-
-          <AlbumList albums={ albums } />
+          { isLoading ? <p>Carregando...</p> : <AlbumList albums={ albums } />}
         </main>
       </div>
     );
