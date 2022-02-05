@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
-import Album from '../components/Album';
+import AlbumList from '../components/AlbumList';
 
 export default class Search extends Component {
   state = {
@@ -58,9 +58,7 @@ export default class Search extends Component {
             </div>
           </form>
 
-          <div className="album-list">
-            { albums.map((album) => <Album key={ album.collectionId } { ...album } />) }
-          </div>
+          <AlbumList albums={ albums } />
         </main>
       </div>
     );
