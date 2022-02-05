@@ -9,6 +9,7 @@ export default class Search extends Component {
     buttonDisabled: true,
     albums: [],
     isLoading: false,
+    searched: '',
   }
 
   handdleChange = ({ target }) => {
