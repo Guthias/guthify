@@ -28,11 +28,16 @@ export default class Search extends Component {
     this.setState({ isLoading: true });
     const { searchValue } = this.state;
     const response = await searchAlbumsAPI(searchValue);
-    this.setState({ albums: response, isLoading: false });
+    this.setState((prevState) => ({
+      albums: response,
+      isLoading: false,
+      searched: prevState.searchValue,
+      searchValue: '',
+    }));
   }
 
   render() {
-    const { searchValue, buttonDisabled, albums, isLoading } = this.state;
+    const { searchValue, searched, buttonDisabled, albums, isLoading } = this.state;
 
     return (
       <div data-testid="page-search">
@@ -59,7 +64,9 @@ export default class Search extends Component {
               </button>
             </div>
           </form>
-          { isLoading ? <p>Carregando...</p> : <AlbumList albums={ albums } />}
+          { isLoading
+            ? <p>Carregando...</p>
+            : <AlbumList albums={ albums } search={ searched } />}
         </main>
       </div>
     );
