@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Prototypes from 'prop-types';
 import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
-import Track from '../components/Track';
+import MusicCard from '../components/MusicCard';
 
 export default class Album extends Component {
   state = {
@@ -34,9 +34,10 @@ export default class Album extends Component {
               <span>{ `${albumDetails.trackCount} Songs` }</span>
             </div>
           </div>
+
           <div className="track-list">
             { musicList.map((track) => (
-              <Track key={ track.previewUrl } { ...track } />
+              <MusicCard key={ track.previewUrl } { ...track } />
             ))}
           </div>
         </div>
