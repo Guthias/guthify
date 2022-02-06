@@ -3,6 +3,7 @@ import Prototypes from 'prop-types';
 import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
+import AlbumDetails from '../components/AlbumDetails';
 
 export default class Album extends Component {
   state = {
@@ -25,17 +26,7 @@ export default class Album extends Component {
         <Header />
         <div className="page-content">
           <div className="page-album">
-            <div className="album-detail">
-              <div className="album-detail-image">
-                <img src={ albumDetails.artworkUrl100 } alt="" />
-              </div>
-              <div className="album-detail-status">
-                <h3>{ albumDetails.collectionName }</h3>
-                <h4>{ albumDetails.artistName }</h4>
-                <span>{ `${albumDetails.trackCount} Songs` }</span>
-              </div>
-            </div>
-
+            <AlbumDetails { ...albumDetails } />
             <div className="track-list">
               { musicList.map((track) => (
                 <MusicCard key={ track.previewUrl } { ...track } />
