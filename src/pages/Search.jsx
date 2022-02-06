@@ -40,34 +40,32 @@ export default class Search extends Component {
     const { searchValue, searched, buttonDisabled, albums, isLoading } = this.state;
 
     return (
-      <div data-testid="page-search">
-        <main className="page-content">
-          <form>
-            <div className={ `search-area ${this.disabledClass()}` }>
-              <input
-                type="text"
-                className="search-input"
-                value={ searchValue }
-                onChange={ this.handdleChange }
-                data-testid="search-artist-input"
-                placeholder="Pesquisar por um artista"
-              />
-              <button
-                type="submit"
-                data-testid="search-artist-button"
-                onClick={ this.searchAlbums }
-                className="button-input"
-                disabled={ buttonDisabled }
-              >
-                Search
-              </button>
-            </div>
-          </form>
-          { isLoading
-            ? <p>Carregando...</p>
-            : <AlbumList albums={ albums } search={ searched } />}
-        </main>
-      </div>
+      <main data-testid="page-search" className="page-content">
+        <form>
+          <div className={ `search-area ${this.disabledClass()}` }>
+            <input
+              type="text"
+              className="search-input"
+              value={ searchValue }
+              onChange={ this.handdleChange }
+              data-testid="search-artist-input"
+              placeholder="Pesquisar por um artista"
+            />
+            <button
+              type="submit"
+              data-testid="search-artist-button"
+              onClick={ this.searchAlbums }
+              className="button-input"
+              disabled={ buttonDisabled }
+            >
+              Search
+            </button>
+          </div>
+        </form>
+        { isLoading
+          ? <p>Carregando...</p>
+          : <AlbumList albums={ albums } search={ searched } />}
+      </main>
     );
   }
 }
