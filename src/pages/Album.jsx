@@ -24,21 +24,23 @@ export default class Album extends Component {
       <div data-testid="page-album">
         <Header />
         <div className="page-content">
-          <div className="album-detail">
-            <div className="album-detail-image">
-              <img src={ albumDetails.artworkUrl100 } alt="" />
+          <div className="page-album">
+            <div className="album-detail">
+              <div className="album-detail-image">
+                <img src={ albumDetails.artworkUrl100 } alt="" />
+              </div>
+              <div className="album-detail-status">
+                <h3>{ albumDetails.collectionName }</h3>
+                <h4>{ albumDetails.artistName }</h4>
+                <span>{ `${albumDetails.trackCount} Songs` }</span>
+              </div>
             </div>
-            <div className="album-detail-status">
-              <h3>{ albumDetails.collectionName }</h3>
-              <h4>{ albumDetails.artistName }</h4>
-              <span>{ `${albumDetails.trackCount} Songs` }</span>
-            </div>
-          </div>
 
-          <div className="track-list">
-            { musicList.map((track) => (
-              <MusicCard key={ track.previewUrl } { ...track } />
-            ))}
+            <div className="track-list">
+              { musicList.map((track) => (
+                <MusicCard key={ track.previewUrl } { ...track } />
+              ))}
+            </div>
           </div>
         </div>
       </div>

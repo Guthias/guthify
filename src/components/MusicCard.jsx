@@ -17,11 +17,9 @@ export default class MusicCard extends Component {
         <span className="track-name">
           {trackName}
         </span>
-
         <span className="track-album">
           { artistName }
         </span>
-
         <span className="track-album">
           { collectionName }
         </span>

@@ -283,3 +283,33 @@ code {
 .album-searched {
   text-align: center;
 }
+
+.page-album {
+  display: flex;
+}
+
+.track-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 30px;
+}
+
+.track {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #333;
+  margin-bottom: 5px;
+}
+
+.track > * {
+  width: 100%;
+  text-align: center;
+}
+
+.album-detail {
+  width: 300px;
+  text-align: center;
+}
