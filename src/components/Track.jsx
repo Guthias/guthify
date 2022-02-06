@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Prototypes from 'prop-types';
 
 export default class Track extends Component {
   render() {
@@ -39,3 +40,11 @@ export default class Track extends Component {
     );
   }
 }
+
+Track.propTypes = {
+  previewUrl: Prototypes.string.isRequired,
+  trackName: Prototypes.string.isRequired,
+  artworkUrl60: Prototypes.string.isRequired,
+  artistName: Prototypes.string.isRequired,
+  collectionName: Prototypes.string.isRequired,
+};
