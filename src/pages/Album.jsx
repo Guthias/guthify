@@ -7,12 +7,15 @@ import Track from '../components/Track';
 export default class Album extends Component {
   state = {
     musicList: [],
+    albumDetails: {},
   }
 
   async componentDidMount() {
     const { match: { params: { id } } } = this.props;
-    const musicList = await getMusics(id);
-    this.setState({ musicList });
+    const response = await getMusics(id);
+    const albumDetails = response.shift();
+    const musicList = response;
+    this.setState({ musicList, albumDetails });
   }
 
   render() {
@@ -21,9 +24,11 @@ export default class Album extends Component {
       <div data-testid="page-album">
         <Header />
         <div className="page-content">
-          { musicList.map(({ previewUrl }) => (
-            <Track key={ previewUrl } previewUrl={ previewUrl } />
-          ))}
+          <div className="track-list">
+            { musicList.map((track) => (
+              <Track key={ track.previewUrl } { ...track } />
+            ))}
+          </div>
         </div>
       </div>
     );
