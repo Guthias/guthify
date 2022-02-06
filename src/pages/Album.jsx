@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Prototypes from 'prop-types';
-import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
 import AlbumDetails from '../components/AlbumDetails';
@@ -23,7 +22,6 @@ export default class Album extends Component {
     const { musicList, albumDetails } = this.state;
     return (
       <div data-testid="page-album">
-        <Header />
         <div className="page-content">
           <div className="page-album">
             <AlbumDetails { ...albumDetails } />

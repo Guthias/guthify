@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Header from '../components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import AlbumList from '../components/AlbumList';
 
@@ -42,7 +41,6 @@ export default class Search extends Component {
 
     return (
       <div data-testid="page-search">
-        <Header />
         <main className="page-content">
           <form>
             <div className={ `search-area ${this.disabledClass()}` }>
