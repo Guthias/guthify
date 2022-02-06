@@ -19,11 +19,21 @@ export default class Album extends Component {
   }
 
   render() {
-    const { musicList } = this.state;
+    const { musicList, albumDetails } = this.state;
     return (
       <div data-testid="page-album">
         <Header />
         <div className="page-content">
+          <div className="album-detail">
+            <div className="album-detail-image">
+              <img src={ albumDetails.artworkUrl100 } alt="" />
+            </div>
+            <div className="album-detail-status">
+              <h3>{ albumDetails.collectionName }</h3>
+              <h4>{ albumDetails.artistName }</h4>
+              <span>{ `${albumDetails.trackCount} Songs` }</span>
+            </div>
+          </div>
           <div className="track-list">
             { musicList.map((track) => (
               <Track key={ track.previewUrl } { ...track } />
