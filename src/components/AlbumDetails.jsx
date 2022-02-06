@@ -12,8 +12,8 @@ export default class AlbumDetails extends Component {
         </div>
 
         <div className="album-detail-status">
-          <h3>{ collectionName }</h3>
-          <h4>{ artistName }</h4>
+          <h3 data-testid="album-name">{ collectionName }</h3>
+          <h4 data-testid="artist-name">{ artistName }</h4>
           <span>{ `${trackCount} Songs` }</span>
         </div>
       </div>
