@@ -24,18 +24,16 @@ export default class Album extends Component {
     return (loading
       ? <p>Carregando...</p>
       : (
-        <div data-testid="page-album">
-          <div className="page-content">
-            <div className="page-album">
-              <AlbumDetails { ...albumDetails } />
-              <div className="track-list">
-                { musicList.map((track) => (
-                  <MusicCard key={ track.previewUrl } { ...track } />
-                ))}
-              </div>
+        <main data-testid="page-album" className="page-content">
+          <div className="page-album">
+            <AlbumDetails { ...albumDetails } />
+            <div className="track-list">
+              { musicList.map((track) => (
+                <MusicCard key={ track.previewUrl } { ...track } />
+              ))}
             </div>
           </div>
-        </div>
+        </main>
       )
     );
   }
