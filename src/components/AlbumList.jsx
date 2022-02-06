@@ -9,7 +9,7 @@ export default class AlbumList extends Component {
       albums.length === 0 ? <p>Nenhum álbum foi encontrado</p>
         : (
           <>
-            <h2>{`Resultado de álbuns de: ${search}`}</h2>
+            <h2 className="album-searched">{`Resultado de álbuns de: ${search}`}</h2>
             <div className="album-list">
               { albums.map((album) => <Album key={ album.collectionId } { ...album } />) }
             </div>

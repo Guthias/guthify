@@ -279,3 +279,7 @@ code {
   font-size: 14px;
   color: #ececec;
 }
+
+.album-searched {
+  text-align: center;
+}
