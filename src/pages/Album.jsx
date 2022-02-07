@@ -11,12 +11,14 @@ export default class Album extends Component {
     loading: true,
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     const { match: { params: { id } } } = this.props;
-    const response = await getMusics(id);
-    const albumDetails = response.shift();
-    const musicList = response;
-    this.setState({ musicList, albumDetails, loading: false });
+    getMusics(id).then((response) => {
+      const results = [...response];
+      const albumDetails = results.shift();
+      const musicList = results;
+      this.setState({ musicList, albumDetails, loading: false });
+    });
   }
 
   render() {
