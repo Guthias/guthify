@@ -21,6 +21,14 @@ export default class Album extends Component {
     });
   }
 
+  handdleFavorite = (trackId) => {
+    console.log(trackId);
+  }
+
+  checkFavorite = (trackId) => {
+    return false;
+  }
+
   render() {
     const { musicList, albumDetails, loading } = this.state;
     return (loading
@@ -31,7 +39,12 @@ export default class Album extends Component {
             <AlbumDetails { ...albumDetails } />
             <div className="track-list">
               { musicList.map((track) => (
-                <MusicCard key={ track.previewUrl } { ...track } />
+                <MusicCard
+                  key={ track.previewUrl }
+                  { ...track }
+                  onInputChange={ this.handdleFavorite }
+                  isFavorited={ this.checkFavorite }
+                />
               ))}
             </div>
           </div>

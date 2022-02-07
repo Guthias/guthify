@@ -9,7 +9,10 @@ export default class MusicCard extends Component {
       artworkUrl60,
       artistName,
       collectionName,
-      trackId } = this.props;
+      trackId,
+      onInputChange,
+      isFavorited } = this.props;
+
     return (
       <div className="track">
         <div className="track-image-area">
@@ -41,6 +44,8 @@ export default class MusicCard extends Component {
             <input
               id={ trackId }
               type="checkbox"
+              checked={ isFavorited(trackId) }
+              onChange={ () => onInputChange(trackId) }
               data-testid={ `checkbox-music-${trackId}` }
             />
             Favorita
