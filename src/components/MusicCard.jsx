@@ -8,7 +8,8 @@ export default class MusicCard extends Component {
       trackName,
       artworkUrl60,
       artistName,
-      collectionName } = this.props;
+      collectionName,
+      trackId } = this.props;
     return (
       <div className="track">
         <div className="track-image-area">
@@ -34,6 +35,17 @@ export default class MusicCard extends Component {
           O seu navegador não suporta o elemento
           <code>audio</code>
         </audio>
+
+        <div className="favorite-album-area">
+          <label htmlFor={ trackId }>
+            <input
+              id={ trackId }
+              type="checkbox"
+              data-testid={ `checkbox-music-${trackId}` }
+            />
+            Favorita
+          </label>
+        </div>
       </div>
     );
   }
