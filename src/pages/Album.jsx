@@ -67,4 +67,8 @@ export default class Album extends Component {
   }
 }
 
-Album.propTypes = { match: Prototypes.shape.isRequired };
+Album.propTypes = { match: Prototypes.shape({
+  params: Prototypes.shape({
+    id: Prototypes.string.isRequired,
+  }).isRequired,
+}).isRequired };
