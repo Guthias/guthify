@@ -24,6 +24,7 @@ export default class Album extends Component {
   }
 
   handdleFavorite = async (id) => {
+    this.setState({ loading: true });
     const { musicList, favorites } = this.state;
     const track = musicList.find(({ trackId }) => trackId === id);
 
@@ -33,7 +34,7 @@ export default class Album extends Component {
       await addSong(track);
     }
 
-    this.setState({ favorites: await getFavoriteSongs() });
+    this.setState({ favorites: await getFavoriteSongs(), loading: false });
   }
 
   checkFavorite = (id) => {
