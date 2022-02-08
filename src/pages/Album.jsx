@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import Prototypes from 'prop-types';
 import getMusics from '../services/musicsAPI';
-import MusicCard from '../components/MusicCard';
 import AlbumDetails from '../components/AlbumDetails';
-import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
+import TrackList from '../components/TrackList';
 
 export default class Album extends Component {
   state = {
     musicList: [],
-    favorites: [],
     albumDetails: {},
     loading: true,
   }
@@ -22,27 +20,7 @@ export default class Album extends Component {
     this.setState({
       musicList,
       albumDetails,
-      loading: false,
-      favorites: await getFavoriteSongs() });
-  }
-
-  handdleFavorite = async (id) => {
-    this.setState({ loading: true });
-    const { musicList, favorites } = this.state;
-    const track = musicList.find(({ trackId }) => trackId === id);
-
-    if (favorites.some(({ trackId }) => id === trackId)) {
-      await removeSong(track);
-    } else {
-      await addSong(track);
-    }
-
-    this.setState({ favorites: await getFavoriteSongs(), loading: false });
-  }
-
-  checkFavorite = (id) => {
-    const { favorites } = this.state;
-    return favorites.some(({ trackId }) => id === trackId);
+      loading: false });
   }
 
   render() {
@@ -53,16 +31,7 @@ export default class Album extends Component {
         <main data-testid="page-album" className="page-content">
           <div className="page-album">
             <AlbumDetails { ...albumDetails } />
-            <div className="track-list">
-              { musicList.map((track) => (
-                <MusicCard
-                  key={ track.previewUrl }
-                  { ...track }
-                  onInputChange={ this.handdleFavorite }
-                  isFavorited={ this.checkFavorite(track.trackId) }
-                />
-              ))}
-            </div>
+            <TrackList musicList={ musicList } />
           </div>
         </main>
       )
