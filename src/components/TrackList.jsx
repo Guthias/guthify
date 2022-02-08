@@ -14,7 +14,8 @@ export default class TrackList extends Component {
 
   handdleFavorite = async (id) => {
     this.setState({ loading: true });
-    const { musicList, favorites } = this.state;
+    const { favorites } = this.state;
+    const { musicList } = this.props;
     const track = musicList.find(({ trackId }) => trackId === id);
 
     if (favorites.some(({ trackId }) => id === trackId)) {
