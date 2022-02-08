@@ -19,7 +19,11 @@ export default class Album extends Component {
     const results = [...response];
     const albumDetails = results.shift();
     const musicList = results;
-    this.setState({ musicList, albumDetails, loading: false });
+    this.setState({
+      musicList,
+      albumDetails,
+      loading: false,
+      favorites: await getFavoriteSongs() });
   }
 
   handdleFavorite = async (id) => {
