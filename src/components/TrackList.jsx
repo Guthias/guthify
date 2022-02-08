@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Prototypes from 'prop-types';
 import MusicCard from './MusicCard';
 import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 
@@ -53,3 +54,12 @@ export default class TrackList extends Component {
     );
   }
 }
+
+TrackList.propTypes = { musicList: Prototypes.arrayOf(PropTypes.shape({
+  previewUrl: Prototypes.string.isRequired,
+  trackName: Prototypes.string.isRequired,
+  artworkUrl60: Prototypes.string.isRequired,
+  artistName: Prototypes.string.isRequired,
+  collectionName: Prototypes.string.isRequired,
+  trackId: Prototypes.number.isRequired,
+})).isRequired };
