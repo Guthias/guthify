@@ -3,10 +3,12 @@ import Prototypes from 'prop-types';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
 import AlbumDetails from '../components/AlbumDetails';
+import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 export default class Album extends Component {
   state = {
     musicList: [],
+    favorites: [],
     albumDetails: {},
     loading: true,
   }
@@ -21,8 +23,11 @@ export default class Album extends Component {
     });
   }
 
-  handdleFavorite = (trackId) => {
-    console.log(trackId);
+  handdleFavorite = async (id) => {
+    const { musicList } = this.state;
+    const track = musicList.find(({ trackId }) => trackId === id);
+    await addSong(track);
+    this.setState({ favorites: await getFavoriteSongs() });
   }
 
   checkFavorite = (trackId) => {
