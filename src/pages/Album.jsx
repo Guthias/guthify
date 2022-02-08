@@ -3,7 +3,7 @@ import Prototypes from 'prop-types';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
 import AlbumDetails from '../components/AlbumDetails';
-import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 
 export default class Album extends Component {
   state = {
@@ -24,9 +24,15 @@ export default class Album extends Component {
   }
 
   handdleFavorite = async (id) => {
-    const { musicList } = this.state;
+    const { musicList, favorites } = this.state;
     const track = musicList.find(({ trackId }) => trackId === id);
-    await addSong(track);
+
+    if (favorites.some(({ trackId }) => id === trackId)) {
+      await removeSong(track);
+    } else {
+      await addSong(track);
+    }
+
     this.setState({ favorites: await getFavoriteSongs() });
   }
 
