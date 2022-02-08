@@ -30,8 +30,9 @@ export default class Album extends Component {
     this.setState({ favorites: await getFavoriteSongs() });
   }
 
-  checkFavorite = (trackId) => {
-    return false;
+  checkFavorite = (id) => {
+    const { favorites } = this.state;
+    return favorites.find(({ trackId }) => id === trackId);
   }
 
   render() {
