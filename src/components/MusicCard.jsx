@@ -44,7 +44,7 @@ export default class MusicCard extends Component {
             <input
               id={ trackId }
               type="checkbox"
-              checked={ isFavorited(trackId) }
+              checked={ isFavorited }
               onChange={ () => onInputChange(trackId) }
               data-testid={ `checkbox-music-${trackId}` }
             />
@@ -62,4 +62,7 @@ MusicCard.propTypes = {
   artworkUrl60: Prototypes.string.isRequired,
   artistName: Prototypes.string.isRequired,
   collectionName: Prototypes.string.isRequired,
+  trackId: Prototypes.number.isRequired,
+  onInputChange: Prototypes.func.isRequired,
+  isFavorited: Prototypes.bool.isRequired,
 };

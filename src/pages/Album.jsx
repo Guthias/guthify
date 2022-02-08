@@ -56,7 +56,7 @@ export default class Album extends Component {
                   key={ track.previewUrl }
                   { ...track }
                   onInputChange={ this.handdleFavorite }
-                  isFavorited={ this.checkFavorite }
+                  isFavorited={ this.checkFavorite(track.trackId) }
                 />
               ))}
             </div>
