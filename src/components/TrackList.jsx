@@ -55,7 +55,7 @@ export default class TrackList extends Component {
   }
 }
 
-TrackList.propTypes = { musicList: Prototypes.arrayOf(PropTypes.shape({
+TrackList.propTypes = { musicList: Prototypes.arrayOf(Prototypes.shape({
   previewUrl: Prototypes.string.isRequired,
   trackName: Prototypes.string.isRequired,
   artworkUrl60: Prototypes.string.isRequired,
