@@ -34,14 +34,15 @@ export default class TrackList extends Component {
   }
 
   render() {
-    const { loading } = this.state;
-    const { musicList } = this.props;
+    const { loading, favorites } = this.state;
+    const { musicList, onlyFavorites } = this.props;
+    const tracks = onlyFavorites ? favorites : musicList;
 
     return (loading
       ? <p>Carregando...</p>
       : (
         <div className="track-list">
-          { musicList.map((track) => (
+          { tracks.map((track) => (
             <MusicCard
               key={ track.previewUrl }
               { ...track }
@@ -55,11 +56,18 @@ export default class TrackList extends Component {
   }
 }
 
-TrackList.propTypes = { musicList: Prototypes.arrayOf(Prototypes.shape({
-  previewUrl: Prototypes.string.isRequired,
-  trackName: Prototypes.string.isRequired,
-  artworkUrl60: Prototypes.string.isRequired,
-  artistName: Prototypes.string.isRequired,
-  collectionName: Prototypes.string.isRequired,
-  trackId: Prototypes.number.isRequired,
-})).isRequired };
+TrackList.defaultProps = {
+  onlyFavorites: false,
+};
+
+TrackList.propTypes = {
+  musicList: Prototypes.arrayOf(Prototypes.shape({
+    previewUrl: Prototypes.string.isRequired,
+    trackName: Prototypes.string.isRequired,
+    artworkUrl60: Prototypes.string.isRequired,
+    artistName: Prototypes.string.isRequired,
+    collectionName: Prototypes.string.isRequired,
+    trackId: Prototypes.number.isRequired,
+  })).isRequired,
+  onlyFavorites: Prototypes.bool,
+};

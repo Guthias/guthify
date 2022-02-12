@@ -15,7 +15,7 @@ export default class Favorites extends Component {
     const { favorites } = this.state;
     return (
       <div data-testid="page-favorites" className="page-content">
-        <TrackList musicList={ favorites } />
+        <TrackList musicList={ favorites } onlyFavorites />
       </div>
     );
   }
