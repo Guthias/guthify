@@ -24,7 +24,10 @@ export default class Login extends Component {
     event.preventDefault();
     const { userNameInput: name } = this.state;
     this.setState({ loading: true });
-    await createUser(({ name }));
+    await createUser(({
+      name,
+      image: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+    }));
     this.setState({
       loading: false,
       redirect: true,
