@@ -29,6 +29,13 @@ export default class ProfileEdit extends Component {
     this.setState({ redirect: true });
   }
 
+  allValidInputs = () => {
+    const { name, email, image, description } = this.state;
+    const validEmail = email.match(/\S+@\S+\.\S+/g);
+    const notEmpty = name && image && description;
+    return !(notEmpty && validEmail);
+  }
+
   renderForm = () => {
     const { name, email, image, description, loading } = this.state;
 
@@ -100,6 +107,7 @@ export default class ProfileEdit extends Component {
                 type="submit"
                 data-testid="edit-button-save"
                 className="profile-button"
+                disabled={ this.allValidInputs() }
                 onClick={ this.saveInfo }
               >
                 Salvar
