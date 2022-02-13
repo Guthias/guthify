@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { getUser, updateUser } from '../services/userAPI';
 
 export default class ProfileEdit extends Component {
@@ -8,6 +9,7 @@ export default class ProfileEdit extends Component {
     image: '',
     description: '',
     loading: true,
+    redirect: false,
   }
 
   async componentDidMount() {
@@ -24,9 +26,10 @@ export default class ProfileEdit extends Component {
     this.setState({ loading: true });
     const { name, email, image, description } = this.state;
     await updateUser({ name, email, image, description });
+    this.setState({ redirect: true });
   }
 
-  render() {
+  renderForm = () => {
     const { name, email, image, description, loading } = this.state;
 
     return (
@@ -98,6 +101,13 @@ export default class ProfileEdit extends Component {
               </button>
             </form>
           </div>)
+    );
+  }
+
+  render() {
+    const { redirect } = this.state;
+    return (
+      redirect ? <Redirect to="/profile" /> : this.renderForm()
     );
   }
 }
