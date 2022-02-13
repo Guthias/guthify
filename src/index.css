@@ -381,3 +381,18 @@ code {
 .profile-button:hover {
   background-color: #0d518d;
 }
+
+.user-profile-image-area {
+  height: 75px;
+  width: 75px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+}
+
+.user-profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

@@ -21,7 +21,12 @@ export default class Profile extends Component {
           <div data-testid="page-profile" className="page-content">
             <form className="user-info-area">
               <div className="user-profile-image-area">
-                <img data-testid="profile-image" src={ user.image } alt="" />
+                <img
+                  data-testid="profile-image"
+                  className="user-profile-image"
+                  src={ user.image }
+                  alt=""
+                />
               </div>
 
               <div className="profile-label">
