@@ -24,36 +24,21 @@ export default class Profile extends Component {
                 <img data-testid="profile-image" src={ user.image } alt="" />
               </div>
 
-              <label className="profile-label" htmlFor="profile-name">
+              <div className="profile-label">
                 Nome de Usuario
-                <input
-                  id="profile-name"
-                  value={ user.name }
-                  className="profile-input"
-                  type="text"
-                  disabled
-                />
-              </label>
+                <span className="profile-input" type="text">{ user.name }</span>
+              </div>
 
               <label className="profile-label" htmlFor="profile-email">
                 E-mail
-                <input
-                  id="profile-email"
-                  className="profile-input"
-                  type="text"
-                  value={ user.email }
-                  disabled
-                />
+                <span className="profile-input" type="text">{ user.email }</span>
               </label>
 
               <label className="profile-label" htmlFor="profile-descritpion">
                 Descrição
-                <textarea
-                  id="profile-descritpion"
-                  value={ user.description }
-                  disabled
-                  className="profile-input profile-textarea"
-                />
+                <span className="profile-input profile-textarea">
+                  { user.description }
+                </span>
               </label>
               <Link to="profile/edit" className="profile-button">Editar perfil</Link>
             </form>
