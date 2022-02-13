@@ -1,16 +1,47 @@
 import React, { Component } from 'react';
+import { getUser, updateUser } from '../services/userAPI';
 
 export default class ProfileEdit extends Component {
+  state = {
+    name: '',
+    email: '',
+    image: '',
+    description: '',
+    loading: true,
+  }
+
+  async componentDidMount() {
+    const user = await getUser();
+    this.setState({ ...user, loading: false });
+  }
+
   render() {
-    const loading = false;
+    const { name, email, image, description, loading } = this.state;
+
     return (
       loading ? <p>Carregando...</p>
         : (
           <div data-testid="page-profile" className="page-content">
             <form className="user-info-area">
               <div className="user-profile-image-area">
-                <img data-testid="profile-image" alt="" />
+                <img
+                  data-testid="profile-image"
+                  className="user-profile-image"
+                  src={ image }
+                  alt=""
+                />
               </div>
+
+              <label className="profile-label" htmlFor="profile-name">
+                Imagem
+                <input
+                  id="profile-name"
+                  className="profile-input"
+                  type="text"
+                  name="image"
+                  value={ image }
+                />
+              </label>
 
               <label className="profile-label" htmlFor="profile-name">
                 Nome de Usuario
@@ -18,6 +49,8 @@ export default class ProfileEdit extends Component {
                   id="profile-name"
                   className="profile-input"
                   type="text"
+                  name="name"
+                  value={ name }
                 />
               </label>
 
@@ -27,6 +60,8 @@ export default class ProfileEdit extends Component {
                   id="profile-email"
                   className="profile-input"
                   type="text"
+                  name="email"
+                  value={ email }
                 />
               </label>
 
@@ -35,6 +70,8 @@ export default class ProfileEdit extends Component {
                 <textarea
                   id="profile-descritpion"
                   className="profile-input profile-textarea"
+                  name="description"
+                  value={ description }
                 />
               </label>
               <button type="submit" className="profile-button">Salvar</button>
