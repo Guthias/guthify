@@ -46,12 +46,13 @@ export default class ProfileEdit extends Component {
                 />
               </div>
 
-              <label className="profile-label" htmlFor="profile-name">
+              <label className="profile-label" htmlFor="profile-image">
                 Imagem
                 <input
-                  id="profile-name"
+                  id="profile-image"
                   className="profile-input"
                   onInput={ this.handleChange }
+                  data-testid="edit-input-image"
                   type="text"
                   name="image"
                   value={ image }
@@ -64,6 +65,7 @@ export default class ProfileEdit extends Component {
                   id="profile-name"
                   className="profile-input"
                   onInput={ this.handleChange }
+                  data-testid="edit-input-name"
                   type="text"
                   name="name"
                   value={ name }
@@ -76,6 +78,7 @@ export default class ProfileEdit extends Component {
                   id="profile-email"
                   className="profile-input"
                   onInput={ this.handleChange }
+                  data-testid="edit-input-email"
                   type="text"
                   name="email"
                   value={ email }
@@ -87,6 +90,7 @@ export default class ProfileEdit extends Component {
                 <textarea
                   id="profile-descritpion"
                   className="profile-input profile-textarea"
+                  data-testid="edit-input-description"
                   onInput={ this.handleChange }
                   name="description"
                   value={ description }
@@ -94,6 +98,7 @@ export default class ProfileEdit extends Component {
               </label>
               <button
                 type="submit"
+                data-testid="edit-button-save"
                 className="profile-button"
                 onClick={ this.saveInfo }
               >
