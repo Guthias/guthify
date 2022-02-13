@@ -17,6 +17,17 @@
   box-sizing: border-box;
 }
 
+html, body, #root {
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  max-height: 100vh;
+  overflow: hidden;
+  flex-direction: column;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -39,10 +50,11 @@ code {
   justify-content: center;
 }
 
-.page-container {
-  background: #191919;
+.page-content {
+  background: black;
   height: 100%;
   width: 100%;
+  overflow-y: auto;
 }
 
 .page-login {
@@ -312,4 +324,59 @@ code {
 .album-detail {
   width: 300px;
   text-align: center;
+}
+
+.user-info-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin: 0 auto;
+  width: 300px;
+}
+
+.profile-label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  width: 100%;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.profile-input {
+  width: 100%;
+  font-weight: 700;
+  background-color: #333;
+  color: white;
+  font-size: 18px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+}
+
+.profile-textarea {
+  height: 100px;
+  resize: none;
+}
+
+.profile-button {
+  display: block;
+  color: white;
+  background-color: #0b6bc0;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+  width: 80%;
+  transition: all ease-in-out 0.2s;
+  border-radius: 10px;
+}
+
+.profile-button:hover {
+  background-color: #0d518d;
 }
