@@ -19,6 +19,13 @@ export default class ProfileEdit extends Component {
     this.setState({ [target.name]: target.value });
   }
 
+  saveInfo = async (event) => {
+    event.preventDefault();
+    this.setState({ loading: true });
+    const { name, email, image, description } = this.state;
+    await updateUser({ name, email, image, description });
+  }
+
   render() {
     const { name, email, image, description, loading } = this.state;
 
@@ -82,7 +89,13 @@ export default class ProfileEdit extends Component {
                   value={ description }
                 />
               </label>
-              <button type="submit" className="profile-button">Salvar</button>
+              <button
+                type="submit"
+                className="profile-button"
+                onClick={ this.saveInfo }
+              >
+                Salvar
+              </button>
             </form>
           </div>)
     );
