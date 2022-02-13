@@ -15,6 +15,10 @@ export default class ProfileEdit extends Component {
     this.setState({ ...user, loading: false });
   }
 
+  handleChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
+  }
+
   render() {
     const { name, email, image, description, loading } = this.state;
 
@@ -37,6 +41,7 @@ export default class ProfileEdit extends Component {
                 <input
                   id="profile-name"
                   className="profile-input"
+                  onInput={ this.handleChange }
                   type="text"
                   name="image"
                   value={ image }
@@ -48,6 +53,7 @@ export default class ProfileEdit extends Component {
                 <input
                   id="profile-name"
                   className="profile-input"
+                  onInput={ this.handleChange }
                   type="text"
                   name="name"
                   value={ name }
@@ -59,6 +65,7 @@ export default class ProfileEdit extends Component {
                 <input
                   id="profile-email"
                   className="profile-input"
+                  onInput={ this.handleChange }
                   type="text"
                   name="email"
                   value={ email }
@@ -70,6 +77,7 @@ export default class ProfileEdit extends Component {
                 <textarea
                   id="profile-descritpion"
                   className="profile-input profile-textarea"
+                  onInput={ this.handleChange }
                   name="description"
                   value={ description }
                 />
