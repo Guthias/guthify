@@ -382,6 +382,11 @@ code {
   background-color: #0d518d;
 }
 
+.profile-button:disabled {
+  background-color: gray;
+  cursor: default;
+}
+
 .user-profile-image-area {
   height: 75px;
   width: 75px;
