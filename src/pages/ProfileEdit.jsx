@@ -42,7 +42,7 @@ export default class ProfileEdit extends Component {
     return (
       loading ? <p>Carregando...</p>
         : (
-          <div data-testid="page-profile" className="page-content">
+          <div data-testid="page-profile-edit" className="page-content">
             <form className="user-info-area">
               <div className="user-profile-image-area">
                 <img
