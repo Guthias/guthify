@@ -1,8 +1,90 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import styled from 'styled-components';
+
 import Loading from '../components/Loading';
+import audioPlayer from '../images/audio-player.svg';
 import { createUser } from '../services/userAPI';
-// import Loading from '../components/Loading';
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  user-select: none;
+`;
+
+const ImageArea = styled.div`
+  width: 150%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #b5d5f1;
+
+  img {
+    width: 50%;
+  }
+`;
+
+const FormArea = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Title = styled.h1`
+  font-size: 2em;
+  color: black;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Input = styled.input`
+  display: flex;
+  flex-direction: column;
+  font-size: 1em;
+  font-weight: 700;
+  width: 80%;
+  padding: 0.5em;
+  margin: 0.25em 0 0.5em 0;
+  outline: none;
+  border: 2px solid black;
+  border-radius: 0.5em;
+  transition: ease-in-out 0.5s all;
+
+  :focus {
+    border-color: #147fdd;
+  }
+`;
+
+const Button = styled.button`
+  background-color: #147fdd;
+  font-size: 1.25em;
+  color: white;
+  border-radius: 0.5em;
+  font-weight: 700;
+  width: 50%;
+  padding: 0.75em;
+  transition: ease-in-out 0.5s all;
+  margin-top: 1em;
+  cursor: pointer;
+  border: none;
+
+  :hover {
+    background-color: #0b6bc0;
+  }
+
+  :disabled {
+    background-color: gray;
+  }
+`;
 
 export default class Login extends Component {
   state = {
@@ -38,29 +120,38 @@ export default class Login extends Component {
     const { userNameInput, buttonDisabled, loading } = this.state;
     return (
       loading ? <Loading /> : (
-        <div data-testid="page-login" className="page-login">
-          <form className="login-form">
-            <h1 className="login-title">Guthify</h1>
-            <input
-              type="text"
-              id="userNameInput"
-              value={ userNameInput }
-              onChange={ this.handleChange }
-              data-testid="login-name-input"
-              placeholder="Nome de Usuario"
-              className="login-input"
-            />
-            <button
-              type="submit"
-              className="login-button"
-              data-testid="login-submit-button"
-              onClick={ this.loginSubmit }
-              disabled={ buttonDisabled }
-            >
-              Login
-            </button>
-          </form>
-        </div>
+        <Container>
+          <ImageArea>
+            <img src={ audioPlayer } alt="" />
+          </ImageArea>
+
+          <FormArea>
+            <Form className="login-form">
+              <Title>Sign in</Title>
+              <Input
+                type="text"
+                value={ userNameInput }
+                onChange={ this.handleChange }
+                placeholder="Username"
+              />
+
+              <Input
+                type="password"
+                placeholder="Password"
+              />
+
+              <Button
+                type="submit"
+                className="login-button"
+                data-testid="login-submit-button"
+                onClick={ this.loginSubmit }
+                disabled={ buttonDisabled }
+              >
+                Login
+              </Button>
+            </Form>
+          </FormArea>
+        </Container>
       )
     );
   }
