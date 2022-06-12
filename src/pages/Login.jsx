@@ -31,58 +31,58 @@ const FormArea = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-`;
 
-const Title = styled.h1`
-  font-size: 2em;
-  color: black;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Input = styled.input`
-  display: flex;
-  flex-direction: column;
-  font-size: 1em;
-  font-weight: 700;
-  width: 80%;
-  padding: 0.5em;
-  margin: 0.25em 0 0.5em 0;
-  outline: none;
-  border: 2px solid black;
-  border-radius: 0.5em;
-  transition: ease-in-out 0.5s all;
-
-  :focus {
-    border-color: #147fdd;
-  }
-`;
-
-const Button = styled.button`
-  background-color: #147fdd;
-  font-size: 1.25em;
-  color: white;
-  border-radius: 0.5em;
-  font-weight: 700;
-  width: 50%;
-  padding: 0.75em;
-  transition: ease-in-out 0.5s all;
-  margin-top: 1em;
-  cursor: pointer;
-  border: none;
-
-  :hover {
-    background-color: #0b6bc0;
+  h1 {
+    font-size: 2em;
+    color: black;
   }
 
-  :disabled {
-    background-color: gray;
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  input {
+    display: flex;
+    flex-direction: column;
+    font-size: 1em;
+    font-weight: 700;
+    width: 80%;
+    padding: 0.5em;
+    margin: 0.25em 0 0.5em 0;
+    outline: none;
+    border: 2px solid black;
+    border-radius: 0.5em;
+    transition: ease-in-out 0.5s all;
+
+    :focus {
+      border-color: #147fdd;
+    }
+  }
+
+  button {
+    background-color: #147fdd;
+    font-size: 1.25em;
+    color: white;
+    border-radius: 0.5em;
+    font-weight: 700;
+    width: 50%;
+    padding: 0.75em;
+    transition: ease-in-out 0.5s all;
+    margin-top: 1em;
+    cursor: pointer;
+    border: none;
+
+    :hover {
+      background-color: #0b6bc0;
+    }
+
+    :disabled {
+      background-color: gray;
+    }
   }
 `;
 
@@ -126,30 +126,28 @@ export default class Login extends Component {
           </ImageArea>
 
           <FormArea>
-            <Form className="login-form">
-              <Title>Sign in</Title>
-              <Input
+            <form>
+              <h1>Sign in</h1>
+              <input
                 type="text"
                 value={ userNameInput }
                 onChange={ this.handleChange }
                 placeholder="Username"
               />
 
-              <Input
+              <input
                 type="password"
                 placeholder="Password"
               />
 
-              <Button
+              <button
                 type="submit"
-                className="login-button"
-                data-testid="login-submit-button"
                 onClick={ this.loginSubmit }
                 disabled={ buttonDisabled }
               >
                 Login
-              </Button>
-            </Form>
+              </button>
+            </form>
           </FormArea>
         </Container>
       )
