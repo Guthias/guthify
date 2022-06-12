@@ -1,6 +1,48 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Prototypes from 'prop-types';
+import styled from 'styled-components';
+
+const AlbumArea = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  width: 15em;
+  text-decoration: none;
+`;
+
+const AlbumImage = styled.div`
+  width: 100%;
+  height: 15em;
+  flex-shrink: 0;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
+const AlbumDetails = styled.div`
+  background: #1e1e1e;
+  height: 100%;
+  padding: 0.8em;
+  display: flex;
+  flex-direction: column;
+  font-weight: 700;
+  font-size: 0.8em;
+
+  h3 {
+    color: white;
+    font-size: 1em;
+    margin: 0;
+  }
+
+  h4 {
+    font-size: 1em;
+    margin: 0;
+    color: gray;
+  }
+`;
 
 export default class Album extends Component {
   render() {
@@ -12,21 +54,16 @@ export default class Album extends Component {
     } = this.props;
 
     return (
-      <Link
-        to={ `/album/${collectionId}` }
-        data-testid={ `link-to-album-${collectionId}` }
-      >
-        <div className="album">
-          <div className="album-image-area">
-            <img src={ artworkUrl100 } className="album-image" alt={ artistName } />
-          </div>
+      <AlbumArea to={ `/album/${collectionId}` }>
+        <AlbumImage>
+          <img src={ artworkUrl100 } alt={ artistName } />
+        </AlbumImage>
 
-          <div className="album-status-area">
-            <span className="album-name">{ collectionName }</span>
-            <span className="album-artist-name">{ artistName }</span>
-          </div>
-        </div>
-      </Link>
+        <AlbumDetails>
+          <h3>{ collectionName }</h3>
+          <h4>{ artistName }</h4>
+        </AlbumDetails>
+      </AlbumArea>
     );
   }
 }
