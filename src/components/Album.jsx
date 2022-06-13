@@ -56,7 +56,10 @@ export default class Album extends Component {
     return (
       <AlbumArea to={ `/album/${collectionId}` }>
         <AlbumImage>
-          <img src={ artworkUrl100 } alt={ artistName } />
+          <img
+            src={ artworkUrl100.replace('100x100bb.jpg', '240x240bb.jpg') }
+            alt={ artistName }
+          />
         </AlbumImage>
 
         <AlbumDetails>

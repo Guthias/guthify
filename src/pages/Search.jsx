@@ -18,11 +18,6 @@ export default class Search extends Component {
     });
   }
 
-  disabledClass = () => {
-    const { buttonDisabled } = this.state;
-    return buttonDisabled && 'disabled';
-  }
-
   searchAlbums = async (event) => {
     event.preventDefault();
     this.setState({ isLoading: true });
@@ -42,20 +37,16 @@ export default class Search extends Component {
     return (
       <main data-testid="page-search" className="page-content">
         <form>
-          <div className={ `search-area ${this.disabledClass()}` }>
+          <div>
             <input
               type="text"
-              className="search-input"
               value={ searchValue }
               onChange={ this.handdleChange }
-              data-testid="search-artist-input"
               placeholder="Pesquisar por um artista"
             />
             <button
               type="submit"
-              data-testid="search-artist-button"
               onClick={ this.searchAlbums }
-              className="button-input"
               disabled={ buttonDisabled }
             >
               Search
