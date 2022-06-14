@@ -25,7 +25,10 @@ const Container = styled.div`
 const PageArea = styled.div`
   flex-direction: column;
   width: 100%;
+  display: flex;
   height: 100%;
+  background-color: black;
+  color: white;
 `;
 
 function Content() {
