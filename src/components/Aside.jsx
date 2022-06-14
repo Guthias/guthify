@@ -61,7 +61,7 @@ export default function Aside() {
   return (
     <AsideArea>
       <LogoArea>
-        <img src={ Logo } alt="Logo do Guthify" />
+        <img src={Logo} alt="Logo do Guthify" />
         <h1>Guthify</h1>
       </LogoArea>
       <nav>

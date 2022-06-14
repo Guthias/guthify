@@ -1,22 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Prototypes from 'prop-types';
 import Album from './Album';
 
-export default class AlbumList extends Component {
-  render() {
-    const { albums, search } = this.props;
-    return (
-      albums.length === 0 ? <p>Nenhum álbum foi encontrado</p>
-        : (
-          <>
-            <h2 className="album-searched">{`Resultado de álbuns de: ${search}`}</h2>
-            <div className="album-list">
-              { albums.map((album) => <Album key={ album.collectionId } { ...album } />) }
-            </div>
-          </>
-        )
-    );
-  }
+export default function AlbumList({ albums, search }) {
+  return (
+    albums.length === 0 ? <p>Nenhum álbum foi encontrado</p>
+      : (
+        <>
+          <h2 className="album-searched">{`Resultado de álbuns de: ${search}`}</h2>
+          <div className="album-list">
+            { albums.map((album) => <Album key={album.collectionId} {...album} />) }
+          </div>
+        </>
+      )
+  );
 }
 
 AlbumList.propTypes = {

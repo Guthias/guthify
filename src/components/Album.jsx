@@ -44,31 +44,24 @@ const AlbumDetails = styled.div`
   }
 `;
 
-export default class Album extends Component {
-  render() {
-    const {
-      artistName,
-      collectionId,
-      collectionName,
-      artworkUrl100,
-    } = this.props;
+export default function Album({
+  artistName, collectionId, collectionName, artworkUrl100,
+}) {
+  return (
+    <AlbumArea to={`/album/${collectionId}`}>
+      <AlbumImage>
+        <img
+          src={artworkUrl100.replace('100x100bb.jpg', '240x240bb.jpg')}
+          alt={artistName}
+        />
+      </AlbumImage>
 
-    return (
-      <AlbumArea to={ `/album/${collectionId}` }>
-        <AlbumImage>
-          <img
-            src={ artworkUrl100.replace('100x100bb.jpg', '240x240bb.jpg') }
-            alt={ artistName }
-          />
-        </AlbumImage>
-
-        <AlbumDetails>
-          <h3>{ collectionName }</h3>
-          <h4>{ artistName }</h4>
-        </AlbumDetails>
-      </AlbumArea>
-    );
-  }
+      <AlbumDetails>
+        <h3>{ collectionName }</h3>
+        <h4>{ artistName }</h4>
+      </AlbumDetails>
+    </AlbumArea>
+  );
 }
 
 Album.propTypes = {

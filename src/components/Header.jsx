@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { IoPerson } from 'react-icons/io5';
@@ -98,19 +98,21 @@ const HeaderArea = styled.header`
   }
 `;
 
-export default class Header extends Component {
-  state = {
-    user: {},
-    loading: true,
-  }
+export default function Header() {
+  const [user, setUser] = useState({ });
+  const [loading, setLoading] = useState(true);
 
-  async componentDidMount() {
-    this.setState({ user: await getUser(), loading: false });
-  }
+  useEffect(() => {
+    const initHeader = async () => {
+      const newUser = await getUser();
+      setUser(newUser);
+      setLoading(false);
+    };
+    initHeader();
+  }, []);
 
-  renderHeader = () => {
-    const { user } = this.state;
-    return (
+  return (
+    loading ? <Loading /> : (
       <HeaderArea>
         <form>
           <input
@@ -133,14 +135,6 @@ export default class Header extends Component {
           </Link>
         </div>
       </HeaderArea>
-    );
-  }
-
-  render() {
-    const { loading } = this.state;
-
-    return (
-      loading ? <Loading /> : this.renderHeader()
-    );
-  }
+    )
+  );
 }

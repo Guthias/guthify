@@ -34,17 +34,17 @@ const PageArea = styled.div`
 function Content() {
   return (
     <Container>
-      <Route path={ loggedRoutes } component={ Aside } />
+      <Route path={loggedRoutes} component={Aside} />
       <PageArea>
-        <Route path={ loggedRoutes } component={ Header } />
+        <Route path={loggedRoutes} component={Header} />
         <Switch>
-          <Route exact path="/" component={ Login } />
-          <Route path="/search" component={ Search } />
-          <Route path="/album/:id" component={ Album } />
-          <Route path="/favorites" component={ Favorites } />
-          <Route exact path="/profile" component={ Profile } />
-          <Route path="/profile/edit" component={ ProfileEdit } />
-          <Route path="*" component={ NotFound } />
+          <Route exact path="/" component={Login} />
+          <Route path="/search" component={Search} />
+          <Route path="/album/:id" component={Album} />
+          <Route path="/favorites" component={Favorites} />
+          <Route exact path="/profile" component={Profile} />
+          <Route path="/profile/edit" component={ProfileEdit} />
+          <Route path="*" component={NotFound} />
         </Switch>
       </PageArea>
     </Container>
