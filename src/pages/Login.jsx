@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Loading from '../components/Loading';
@@ -31,6 +31,7 @@ const FormArea = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: white;
 
   h1 {
     font-size: 2em;
@@ -86,78 +87,67 @@ const FormArea = styled.div`
   }
 `;
 
-export default class Login extends Component {
-  state = {
-    userNameInput: '',
-    buttonDisabled: true,
-    loading: false,
-    redirect: false,
-  }
+export default function Login() {
+  const [username, setUsername] = useState('');
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
-  handleChange = ({ target }) => {
-    const MIN_USERNAME_LENGTH = 3;
-    this.setState({
-      userNameInput: target.value,
-      buttonDisabled: target.value.length < MIN_USERNAME_LENGTH,
-    });
-  }
+  useEffect(() => {
+    const verifyInputs = () => {
+      const MIN_USERNAME_LENGTH = 3;
+      setButtonDisabled(username.length < MIN_USERNAME_LENGTH);
+    };
+    verifyInputs();
+  }, [username]);
 
-  loginSubmit = async (event) => {
+  const handleChange = ({ target }) => {
+    setUsername(target.value);
+  };
+
+  const loginSubmit = async (event) => {
     event.preventDefault();
-    const { userNameInput: name } = this.state;
-    this.setState({ loading: true });
+    setLoading(true);
     await createUser(({
-      name,
+      name: username,
       image: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
     }));
-    this.setState({
-      loading: false,
-      redirect: true,
-    });
-  }
 
-  renderForm = () => {
-    const { userNameInput, buttonDisabled, loading } = this.state;
-    return (
-      loading ? <Loading /> : (
-        <Container>
-          <ImageArea>
-            <img src={ audioPlayer } alt="" />
-          </ImageArea>
+    history.push('/search');
+  };
 
-          <FormArea>
-            <form>
-              <h1>Sign in</h1>
-              <input
-                type="text"
-                value={ userNameInput }
-                onChange={ this.handleChange }
-                placeholder="Username"
-              />
+  return (
+    loading ? <Loading /> : (
+      <Container>
+        <ImageArea>
+          <img src={audioPlayer} alt="" />
+        </ImageArea>
 
-              <input
-                type="password"
-                placeholder="Password"
-              />
+        <FormArea>
+          <form>
+            <h1>Sign in</h1>
+            <input
+              type="text"
+              value={username}
+              onChange={handleChange}
+              placeholder="Username"
+            />
 
-              <button
-                type="submit"
-                onClick={ this.loginSubmit }
-                disabled={ buttonDisabled }
-              >
-                Login
-              </button>
-            </form>
-          </FormArea>
-        </Container>
-      )
-    );
-  }
+            <input
+              type="password"
+              placeholder="Password"
+            />
 
-  render() {
-    const { redirect } = this.state;
-    return (
-      redirect ? <Redirect to="/search" /> : this.renderForm()
-    );
-  }
+            <button
+              type="submit"
+              onClick={loginSubmit}
+              disabled={buttonDisabled}
+            >
+              Login
+            </button>
+          </form>
+        </FormArea>
+      </Container>
+    )
+  );
 }
