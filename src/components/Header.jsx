@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { IoPerson } from 'react-icons/io5';
 import { FaMoon, FaSearch } from 'react-icons/fa';
-
+import useSearch from '../hooks/useSearch';
 import { getUser } from '../services/userAPI';
 import Loading from './Loading';
 
@@ -101,6 +101,17 @@ const HeaderArea = styled.header`
 export default function Header() {
   const [user, setUser] = useState({ });
   const [loading, setLoading] = useState(true);
+  const { updateSearch } = useSearch();
+  const [searchValue, setSearchValue] = useState('');
+
+  const handleChange = ({ target }) => {
+    setSearchValue(target.value);
+  };
+
+  const submitSearch = (event) => {
+    event.preventDefault();
+    updateSearch(searchValue);
+  };
 
   useEffect(() => {
     const initHeader = async () => {
@@ -118,15 +129,17 @@ export default function Header() {
           <input
             type="text"
             id="search"
+            value={searchValue}
+            onChange={handleChange}
             placeholder="Search for artists, albuns or musics"
           />
-          <button type="submit">
+          <button type="submit" onClick={submitSearch}>
             <FaSearch />
           </button>
         </form>
 
         <div>
-          <button type="button">
+          <button type="submit">
             <FaMoon />
           </button>
           <Link to="/profile">
