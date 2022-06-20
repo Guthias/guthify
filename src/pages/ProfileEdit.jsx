@@ -19,7 +19,7 @@ export default function ProfileEdit() {
       setLoading(false);
     };
     fetchUserInfo();
-  });
+  }, []);
 
   const handleChange = ({ target }) => {
     setUser({ ...user, [target.name]: target.value });

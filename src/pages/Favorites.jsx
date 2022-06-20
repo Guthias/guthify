@@ -11,7 +11,7 @@ export default function Favorites() {
       setFavorites(results);
     };
     fetchFavorites();
-  });
+  }, [setFavorites]);
 
   return (
     <div data-testid="page-favorites" className="page-content">

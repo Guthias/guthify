@@ -13,7 +13,7 @@ export default function Profile() {
       setLoading(false);
     };
     fetchUser();
-  });
+  }, []);
 
   return (
     loading ? <p>Carregando...</p>

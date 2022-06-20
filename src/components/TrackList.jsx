@@ -14,7 +14,7 @@ export default function TrackList({ musicList, onlyFavorites }) {
       setLoading(false);
     };
     fetchFavorites();
-  }, [favorites]);
+  }, []);
 
   const handdleFavorite = async (id) => {
     const track = musicList.find(({ trackId }) => trackId === id);

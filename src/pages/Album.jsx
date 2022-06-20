@@ -20,7 +20,7 @@ export default function Album() {
       setLoading(false);
     };
     fetchAlbumInfo();
-  });
+  }, []);
 
   return (loading
     ? <p>Carregando...</p>
