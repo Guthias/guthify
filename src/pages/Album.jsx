@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import getMusics from '../services/musicsAPI';
 import AlbumDetails from '../components/AlbumDetails';
 import TrackList from '../components/TrackList';
+import LocalLoading from '../components/LocalLoading';
 
 export default function Album() {
   const [musicList, setMusicList] = useState([]);
@@ -23,7 +24,7 @@ export default function Album() {
   }, []);
 
   return (loading
-    ? <p>Carregando...</p>
+    ? <LocalLoading />
     : (
       <main data-testid="page-album" className="page-content">
         <AlbumDetails albumDetails={albumDetails} />

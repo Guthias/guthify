@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import AlbumList from '../components/AlbumList';
 import useSearch from '../hooks/useSearch';
+import LocalLoading from '../components/LocalLoading';
 
 export default function Search() {
   const [albums, setAlbums] = useState([]);
@@ -21,7 +22,7 @@ export default function Search() {
   return (
     <main className="page-content">
       { isLoading
-        ? <p>Carregando...</p>
+        ? <LocalLoading />
         : <AlbumList albums={albums} />}
     </main>
   );

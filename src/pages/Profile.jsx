@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import LocalLoading from '../components/LocalLoading';
 import { getUser } from '../services/userAPI';
 
 export default function Profile() {
@@ -16,7 +17,7 @@ export default function Profile() {
   }, []);
 
   return (
-    loading ? <p>Carregando...</p>
+    loading ? <LocalLoading />
       : (
         <div className="page-content">
           <form className="user-info-area">

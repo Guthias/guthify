@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Prototypes from 'prop-types';
 import MusicCard from './MusicCard';
 import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
+import LocalLoading from './LocalLoading';
 
 export default function TrackList({ musicList, onlyFavorites }) {
   const [favorites, setFavorites] = useState([]);
@@ -34,7 +35,7 @@ export default function TrackList({ musicList, onlyFavorites }) {
   const tracks = onlyFavorites ? favorites : musicList;
 
   return (loading
-    ? <p>Carregando...</p>
+    ? <LocalLoading />
     : (
       <div className="track-list">
         { tracks.map((track) => (

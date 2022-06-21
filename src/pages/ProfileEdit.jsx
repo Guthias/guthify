@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import LocalLoading from '../components/LocalLoading';
 import { getUser, updateUser } from '../services/userAPI';
 
 export default function ProfileEdit() {
@@ -46,7 +47,7 @@ export default function ProfileEdit() {
   } = user;
 
   return (
-    loading ? <p>Carregando...</p>
+    loading ? <LocalLoading />
       : (
         <div data-testid="page-profile-edit" className="page-content">
           <form className="user-info-area">
