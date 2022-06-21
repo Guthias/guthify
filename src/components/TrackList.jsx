@@ -16,7 +16,7 @@ export default function TrackList({ musicList, onlyFavorites }) {
     fetchFavorites();
   }, []);
 
-  const handdleFavorite = async (id) => {
+  const toggleFavorite = async (id) => {
     const track = musicList.find(({ trackId }) => trackId === id);
 
     if (favorites.some(({ trackId }) => id === trackId)) {
@@ -40,8 +40,8 @@ export default function TrackList({ musicList, onlyFavorites }) {
         { tracks.map((track) => (
           <MusicCard
             key={track.previewUrl}
-            {...track}
-            onInputChange={handdleFavorite}
+            trackDetails={track}
+            toggleFavorite={toggleFavorite}
             isFavorited={checkFavorite(track.trackId)}
           />
         ))}

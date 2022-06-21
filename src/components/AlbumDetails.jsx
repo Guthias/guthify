@@ -8,6 +8,7 @@ const AlbumArea = styled.div`
   flex-direction: row;
   align-items: stretch;
   padding: 2em 4em;
+
   .image-area {
     width: 200px;
     height: 100%;
