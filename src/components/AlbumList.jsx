@@ -13,14 +13,36 @@ const AlbumListArea = styled.div`
   justify-content: space-evenly;
 `;
 
+const SearchResult = styled.h2`
+  font-weight: 700;
+  text-align: center;
+`;
+
+const NotFound = styled.div`
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 50%;
+  }
+`;
+
 export default function AlbumList({ albums }) {
   const { searchedValue } = useSearch();
 
   return (
-    albums.length === 0 ? <p>Nenhum álbum foi encontrado</p>
-      : (
+    albums.length === 0
+      ? (
+        <NotFound>
+          <h2>{'We couldn\'t find any results'}</h2>
+          <img src="https://media3.giphy.com/media/26n6WywJyh39n1pBu/giphy.gif?cid=ecf05e470yp202bvs9yjls58iia8nke6m6cpkhr0q3039atx&rid=giphy.gif&ct=g" alt="" />
+        </NotFound>
+      ) : (
         <>
-          <h2 className="album-searched">{`Resultado de álbuns de: ${searchedValue}`}</h2>
+          <SearchResult>{`Resultado de álbuns de: ${searchedValue}`}</SearchResult>
           <AlbumListArea>
             { albums.map((album) => <Album key={album.collectionId} albumDetails={album} />) }
           </AlbumListArea>
