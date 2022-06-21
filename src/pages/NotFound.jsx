@@ -1,9 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class NotFound extends Component {
-  render() {
-    return (
-      <div data-testid="page-not-found"> PAGINA NÃO ENCONTRADA ERRO 404 </div>
-    );
-  }
+export default function NotFound() {
+  return (<div>PAGINA NÃO ENCONTRADA ERRO 404 </div>);
 }

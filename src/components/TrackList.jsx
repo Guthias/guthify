@@ -1,22 +1,32 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import Prototypes from 'prop-types';
+import styled from 'styled-components';
+
 import MusicCard from './MusicCard';
 import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
+import LocalLoading from './LocalLoading';
 
-export default class TrackList extends Component {
-  state = {
-    favorites: [],
-    loading: true,
-  }
+const TrackArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 30px;
+`;
 
-  async componentDidMount() {
-    this.setState({ favorites: await getFavoriteSongs(), loading: false });
-  }
+export default function TrackList({ musicList, onlyFavorites }) {
+  const [favorites, setFavorites] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  handdleFavorite = async (id) => {
-    this.setState({ loading: true });
-    const { favorites } = this.state;
-    const { musicList } = this.props;
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      const data = await getFavoriteSongs();
+      setFavorites(data);
+      setLoading(false);
+    };
+    fetchFavorites();
+  }, []);
+
+  const toggleFavorite = async (id) => {
     const track = musicList.find(({ trackId }) => trackId === id);
 
     if (favorites.some(({ trackId }) => id === trackId)) {
@@ -25,35 +35,29 @@ export default class TrackList extends Component {
       await addSong(track);
     }
 
-    this.setState({ favorites: await getFavoriteSongs(), loading: false });
-  }
+    const newFavorites = await getFavoriteSongs();
+    setFavorites(newFavorites);
+  };
 
-  checkFavorite = (id) => {
-    const { favorites } = this.state;
-    return favorites.some(({ trackId }) => id === trackId);
-  }
+  const checkFavorite = (id) => favorites.some(({ trackId }) => id === trackId);
 
-  render() {
-    const { loading, favorites } = this.state;
-    const { musicList, onlyFavorites } = this.props;
-    const tracks = onlyFavorites ? favorites : musicList;
+  const tracks = onlyFavorites ? favorites : musicList;
 
-    return (loading
-      ? <p>Carregando...</p>
-      : (
-        <div className="track-list">
-          { tracks.map((track) => (
-            <MusicCard
-              key={ track.previewUrl }
-              { ...track }
-              onInputChange={ this.handdleFavorite }
-              isFavorited={ this.checkFavorite(track.trackId) }
-            />
-          ))}
-        </div>
-      )
-    );
-  }
+  return (loading
+    ? <LocalLoading />
+    : (
+      <TrackArea>
+        { tracks.map((track) => (
+          <MusicCard
+            key={track.previewUrl}
+            trackDetails={track}
+            toggleFavorite={toggleFavorite}
+            isFavorited={checkFavorite(track.trackId)}
+          />
+        ))}
+      </TrackArea>
+    )
+  );
 }
 
 TrackList.defaultProps = {

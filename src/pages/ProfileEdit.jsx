@@ -1,126 +1,117 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import LocalLoading from '../components/LocalLoading';
 import { getUser, updateUser } from '../services/userAPI';
+import { MainContainer } from '../styles/main';
 
-export default class ProfileEdit extends Component {
-  state = {
+export default function ProfileEdit() {
+  const [user, setUser] = useState({
     name: '',
     email: '',
     image: '',
     description: '',
-    loading: true,
-    redirect: false,
-  }
+  });
+  const [loading, setLoading] = useState(true);
+  const history = useHistory();
 
-  async componentDidMount() {
-    const user = await getUser();
-    this.setState({ ...user, loading: false });
-  }
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      const userInfo = await getUser();
+      setUser(userInfo);
+      setLoading(false);
+    };
+    fetchUserInfo();
+  }, []);
 
-  handleChange = ({ target }) => {
-    this.setState({ [target.name]: target.value });
-  }
+  const handleChange = ({ target }) => {
+    setUser({ ...user, [target.name]: target.value });
+  };
 
-  saveInfo = async (event) => {
+  const saveInfo = async (event) => {
     event.preventDefault();
-    this.setState({ loading: true });
-    const { name, email, image, description } = this.state;
-    await updateUser({ name, email, image, description });
-    this.setState({ redirect: true });
-  }
+    setLoading(true);
+    await updateUser(user);
+    history.push('/profile');
+  };
 
-  allValidInputs = () => {
-    const { name, email, image, description } = this.state;
+  const allValidInputs = () => {
+    const {
+      name, email, image, description,
+    } = user;
     const validEmail = email.match(/\S+@\S+\.\S+/g);
     const notEmpty = name && image && description;
     return !(notEmpty && validEmail);
-  }
+  };
 
-  renderForm = () => {
-    const { name, email, image, description, loading } = this.state;
+  const {
+    name, email, image, description,
+  } = user;
 
-    return (
-      loading ? <p>Carregando...</p>
-        : (
-          <div data-testid="page-profile-edit" className="page-content">
-            <form className="user-info-area">
-              <div className="user-profile-image-area">
-                <img
-                  data-testid="profile-image"
-                  className="user-profile-image"
-                  src={ image }
-                  alt=""
-                />
-              </div>
+  return (
+    loading ? <LocalLoading />
+      : (
+        <MainContainer>
+          <ProfileEdit>
+            <div className="user-profile-image-area">
+              <img
+                className="user-profile-image"
+                src={image}
+                alt=""
+              />
+            </div>
 
-              <label className="profile-label" htmlFor="profile-image">
-                Imagem
-                <input
-                  id="profile-image"
-                  className="profile-input"
-                  onInput={ this.handleChange }
-                  data-testid="edit-input-image"
-                  type="text"
-                  name="image"
-                  value={ image }
-                />
-              </label>
+            <label htmlFor="profile-image">
+              Image
+              <input
+                id="profile-image"
+                onInput={handleChange}
+                type="text"
+                name="image"
+                value={image}
+              />
+            </label>
 
-              <label className="profile-label" htmlFor="profile-name">
-                Nome de Usuario
-                <input
-                  id="profile-name"
-                  className="profile-input"
-                  onInput={ this.handleChange }
-                  data-testid="edit-input-name"
-                  type="text"
-                  name="name"
-                  value={ name }
-                />
-              </label>
+            <label htmlFor="profile-name">
+              Username
+              <input
+                id="profile-name"
+                onInput={handleChange}
+                type="text"
+                name="name"
+                value={name}
+              />
+            </label>
 
-              <label className="profile-label" htmlFor="profile-email">
-                E-mail
-                <input
-                  id="profile-email"
-                  className="profile-input"
-                  onInput={ this.handleChange }
-                  data-testid="edit-input-email"
-                  type="text"
-                  name="email"
-                  value={ email }
-                />
-              </label>
+            <label htmlFor="profile-email">
+              E-mail
+              <input
+                id="profile-email"
+                onInput={handleChange}
+                type="text"
+                name="email"
+                value={email}
+              />
+            </label>
 
-              <label className="profile-label" htmlFor="profile-descritpion">
-                Descrição
-                <textarea
-                  id="profile-descritpion"
-                  className="profile-input profile-textarea"
-                  data-testid="edit-input-description"
-                  onInput={ this.handleChange }
-                  name="description"
-                  value={ description }
-                />
-              </label>
-              <button
-                type="submit"
-                data-testid="edit-button-save"
-                className="profile-button"
-                disabled={ this.allValidInputs() }
-                onClick={ this.saveInfo }
-              >
-                Salvar
-              </button>
-            </form>
-          </div>)
-    );
-  }
+            <label htmlFor="profile-descritpion">
+              Description
+              <textarea
+                id="profile-descritpion"
+                onInput={handleChange}
+                name="description"
+                value={description}
+              />
+            </label>
 
-  render() {
-    const { redirect } = this.state;
-    return (
-      redirect ? <Redirect to="/profile" /> : this.renderForm()
-    );
-  }
+            <button
+              type="submit"
+              disabled={allValidInputs()}
+              onClick={saveInfo}
+            >
+              Salvar
+            </button>
+          </ProfileEdit>
+        </MainContainer>
+      )
+  );
 }

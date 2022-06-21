@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import TrackList from '../components/TrackList';
 import { getFavoriteSongs } from '../services/favoriteSongsAPI';
+import { MainContainer } from '../styles/main';
 
-export default class Favorites extends Component {
-  state = {
-    favorites: [],
-  }
+export default function Favorites() {
+  const [favorites, setFavorites] = useState([]);
 
-  async componentDidMount() {
-    this.setState({ favorites: await getFavoriteSongs() });
-  }
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      const results = await getFavoriteSongs();
+      setFavorites(results);
+    };
+    fetchFavorites();
+  }, [setFavorites]);
 
-  render() {
-    const { favorites } = this.state;
-    return (
-      <div data-testid="page-favorites" className="page-content">
-        <TrackList musicList={ favorites } onlyFavorites />
-      </div>
-    );
-  }
+  return (
+    <MainContainer>
+      <TrackList musicList={favorites} onlyFavorites />
+    </MainContainer>
+  );
 }

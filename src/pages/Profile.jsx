@@ -1,53 +1,49 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import LocalLoading from '../components/LocalLoading';
 import { getUser } from '../services/userAPI';
+import { MainContainer } from '../styles/main';
+import { ProfileArea } from '../styles/profile';
 
-export default class Profile extends Component {
-  state = {
-    user: {},
-    loading: true,
-  }
+export default function Profile() {
+  const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(true);
 
-  async componentDidMount() {
-    this.setState({ user: await getUser(), loading: false });
-  }
+  useEffect(() => {
+    const fetchUser = async () => {
+      const userData = await getUser();
+      setUser(userData);
+      setLoading(false);
+    };
+    fetchUser();
+  }, []);
 
-  render() {
-    const { user, loading } = this.state;
+  return (
+    loading ? <LocalLoading />
+      : (
+        <MainContainer>
+          <ProfileArea>
+            <div className="image-area">
+              <img src={user.image} alt="" />
+            </div>
 
-    return (
-      loading ? <p>Carregando...</p>
-        : (
-          <div data-testid="page-profile" className="page-content">
-            <form className="user-info-area">
-              <div className="user-profile-image-area">
-                <img
-                  data-testid="profile-image"
-                  className="user-profile-image"
-                  src={ user.image }
-                  alt=""
-                />
-              </div>
+            <label htmlFor="profile-name">
+              Username
+              <input id="profile-name" type="text" value={user.name} disabled />
+            </label>
 
-              <div className="profile-label">
-                Nome de Usuario
-                <span className="profile-input" type="text">{ user.name }</span>
-              </div>
+            <label htmlFor="profile-email">
+              E-mail
+              <input id="profile-email" type="text" value={user.email} disabled />
+            </label>
 
-              <label className="profile-label" htmlFor="profile-email">
-                E-mail
-                <span className="profile-input" type="text">{ user.email }</span>
-              </label>
-
-              <label className="profile-label" htmlFor="profile-descritpion">
-                Descrição
-                <span className="profile-input profile-textarea">
-                  { user.description }
-                </span>
-              </label>
-              <Link to="profile/edit" className="profile-button">Editar perfil</Link>
-            </form>
-          </div>)
-    );
-  }
+            <label htmlFor="profile-descritpion">
+              Description
+              <textarea id="profile-descritpion" value={user.description} disabled />
+            </label>
+            <Link to="profile/edit" className="profile-button">Editar perfil</Link>
+          </ProfileArea>
+        </MainContainer>
+      )
+  );
 }
