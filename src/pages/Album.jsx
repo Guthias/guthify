@@ -26,10 +26,8 @@ export default function Album() {
     ? <p>Carregando...</p>
     : (
       <main data-testid="page-album" className="page-content">
-        <div className="page-album">
-          <AlbumDetails {...albumDetails} />
-          <TrackList musicList={musicList} />
-        </div>
+        <AlbumDetails albumDetails={albumDetails} />
+        <TrackList musicList={musicList} />
       </main>
     )
   );
