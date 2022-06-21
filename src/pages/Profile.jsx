@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import LocalLoading from '../components/LocalLoading';
 import { getUser } from '../services/userAPI';
 import { MainContainer } from '../styles/main';
+import { ProfileArea } from '../styles/profile';
 
 export default function Profile() {
   const [user, setUser] = useState({});
@@ -21,34 +22,27 @@ export default function Profile() {
     loading ? <LocalLoading />
       : (
         <MainContainer>
-          <form className="user-info-area">
-            <div className="user-profile-image-area">
-              <img
-                data-testid="profile-image"
-                className="user-profile-image"
-                src={user.image}
-                alt=""
-              />
+          <ProfileArea>
+            <div className="image-area">
+              <img src={user.image} alt="" />
             </div>
 
-            <div className="profile-label">
-              Nome de Usuario
-              <span className="profile-input" type="text">{ user.name }</span>
-            </div>
-
-            <label className="profile-label" htmlFor="profile-email">
-              E-mail
-              <span className="profile-input" type="text">{ user.email }</span>
+            <label htmlFor="profile-name">
+              Username
+              <input id="profile-name" type="text" value={user.name} disabled />
             </label>
 
-            <label className="profile-label" htmlFor="profile-descritpion">
-              Descrição
-              <span className="profile-input profile-textarea">
-                { user.description }
-              </span>
+            <label htmlFor="profile-email">
+              E-mail
+              <input id="profile-email" type="text" value={user.email} disabled />
+            </label>
+
+            <label htmlFor="profile-descritpion">
+              Description
+              <textarea id="profile-descritpion" value={user.description} disabled />
             </label>
             <Link to="profile/edit" className="profile-button">Editar perfil</Link>
-          </form>
+          </ProfileArea>
         </MainContainer>
       )
   );

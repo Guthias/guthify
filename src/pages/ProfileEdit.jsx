@@ -51,7 +51,7 @@ export default function ProfileEdit() {
     loading ? <LocalLoading />
       : (
         <MainContainer>
-          <form className="user-info-area">
+          <ProfileEdit>
             <div className="user-profile-image-area">
               <img
                 className="user-profile-image"
@@ -60,11 +60,10 @@ export default function ProfileEdit() {
               />
             </div>
 
-            <label className="profile-label" htmlFor="profile-image">
-              Imagem
+            <label htmlFor="profile-image">
+              Image
               <input
                 id="profile-image"
-                className="profile-input"
                 onInput={handleChange}
                 type="text"
                 name="image"
@@ -72,11 +71,10 @@ export default function ProfileEdit() {
               />
             </label>
 
-            <label className="profile-label" htmlFor="profile-name">
-              Nome de Usuario
+            <label htmlFor="profile-name">
+              Username
               <input
                 id="profile-name"
-                className="profile-input"
                 onInput={handleChange}
                 type="text"
                 name="name"
@@ -84,11 +82,10 @@ export default function ProfileEdit() {
               />
             </label>
 
-            <label className="profile-label" htmlFor="profile-email">
+            <label htmlFor="profile-email">
               E-mail
               <input
                 id="profile-email"
-                className="profile-input"
                 onInput={handleChange}
                 type="text"
                 name="email"
@@ -96,25 +93,24 @@ export default function ProfileEdit() {
               />
             </label>
 
-            <label className="profile-label" htmlFor="profile-descritpion">
-              Descrição
+            <label htmlFor="profile-descritpion">
+              Description
               <textarea
                 id="profile-descritpion"
-                className="profile-input profile-textarea"
                 onInput={handleChange}
                 name="description"
                 value={description}
               />
             </label>
+
             <button
               type="submit"
-              className="profile-button"
               disabled={allValidInputs()}
               onClick={saveInfo}
             >
               Salvar
             </button>
-          </form>
+          </ProfileEdit>
         </MainContainer>
       )
   );
