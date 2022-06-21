@@ -5,6 +5,7 @@ import getMusics from '../services/musicsAPI';
 import AlbumDetails from '../components/AlbumDetails';
 import TrackList from '../components/TrackList';
 import LocalLoading from '../components/LocalLoading';
+import { MainContainer } from '../styles/main';
 
 export default function Album() {
   const [musicList, setMusicList] = useState([]);
@@ -26,10 +27,10 @@ export default function Album() {
   return (loading
     ? <LocalLoading />
     : (
-      <main data-testid="page-album" className="page-content">
+      <MainContainer>
         <AlbumDetails albumDetails={albumDetails} />
         <TrackList musicList={musicList} />
-      </main>
+      </MainContainer>
     )
   );
 }

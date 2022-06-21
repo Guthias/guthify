@@ -44,9 +44,10 @@ const AlbumDetails = styled.div`
   }
 `;
 
-export default function Album({
-  artistName, collectionId, collectionName, artworkUrl100,
-}) {
+export default function Album({ albumDetails }) {
+  const {
+    artistName, collectionId, collectionName, artworkUrl100,
+  } = albumDetails;
   return (
     <AlbumArea to={`/album/${collectionId}`}>
       <AlbumImage>
@@ -65,8 +66,10 @@ export default function Album({
 }
 
 Album.propTypes = {
-  artistName: Prototypes.string.isRequired,
-  collectionId: Prototypes.number.isRequired,
-  collectionName: Prototypes.string.isRequired,
-  artworkUrl100: Prototypes.string.isRequired,
+  albumDetails: Prototypes.shape({
+    artistName: Prototypes.string.isRequired,
+    collectionId: Prototypes.number.isRequired,
+    collectionName: Prototypes.string.isRequired,
+    artworkUrl100: Prototypes.string.isRequired,
+  }).isRequired,
 };

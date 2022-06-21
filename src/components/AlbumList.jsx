@@ -1,7 +1,17 @@
 import React from 'react';
 import Prototypes from 'prop-types';
+import styled from 'styled-components';
 import Album from './Album';
 import useSearch from '../hooks/useSearch';
+
+const AlbumListArea = styled.div`
+  width: 80%;
+  margin: 40px auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-evenly;
+`;
 
 export default function AlbumList({ albums }) {
   const { searchedValue } = useSearch();
@@ -11,16 +21,15 @@ export default function AlbumList({ albums }) {
       : (
         <>
           <h2 className="album-searched">{`Resultado de álbuns de: ${searchedValue}`}</h2>
-          <div className="album-list">
-            { albums.map((album) => <Album key={album.collectionId} {...album} />) }
-          </div>
+          <AlbumListArea>
+            { albums.map((album) => <Album key={album.collectionId} albumDetails={album} />) }
+          </AlbumListArea>
         </>
       )
   );
 }
 
 AlbumList.propTypes = {
-  search: Prototypes.string.isRequired,
   albums: Prototypes.arrayOf(Prototypes.shape({
     artistName: Prototypes.string.isRequired,
     collectionId: Prototypes.number.isRequired,

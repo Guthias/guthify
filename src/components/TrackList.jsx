@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import Prototypes from 'prop-types';
+import styled from 'styled-components';
+
 import MusicCard from './MusicCard';
 import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import LocalLoading from './LocalLoading';
+
+const TrackArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 30px;
+`;
 
 export default function TrackList({ musicList, onlyFavorites }) {
   const [favorites, setFavorites] = useState([]);
@@ -37,7 +46,7 @@ export default function TrackList({ musicList, onlyFavorites }) {
   return (loading
     ? <LocalLoading />
     : (
-      <div className="track-list">
+      <TrackArea>
         { tracks.map((track) => (
           <MusicCard
             key={track.previewUrl}
@@ -46,7 +55,7 @@ export default function TrackList({ musicList, onlyFavorites }) {
             isFavorited={checkFavorite(track.trackId)}
           />
         ))}
-      </div>
+      </TrackArea>
     )
   );
 }

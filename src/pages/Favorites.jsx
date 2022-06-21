@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TrackList from '../components/TrackList';
 import { getFavoriteSongs } from '../services/favoriteSongsAPI';
+import { MainContainer } from '../styles/main';
 
 export default function Favorites() {
   const [favorites, setFavorites] = useState([]);
@@ -14,8 +15,8 @@ export default function Favorites() {
   }, [setFavorites]);
 
   return (
-    <div data-testid="page-favorites" className="page-content">
+    <MainContainer>
       <TrackList musicList={favorites} onlyFavorites />
-    </div>
+    </MainContainer>
   );
 }

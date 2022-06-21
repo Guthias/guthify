@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import LocalLoading from '../components/LocalLoading';
 import { getUser, updateUser } from '../services/userAPI';
+import { MainContainer } from '../styles/main';
 
 export default function ProfileEdit() {
   const [user, setUser] = useState({
@@ -49,7 +50,7 @@ export default function ProfileEdit() {
   return (
     loading ? <LocalLoading />
       : (
-        <div data-testid="page-profile-edit" className="page-content">
+        <MainContainer>
           <form className="user-info-area">
             <div className="user-profile-image-area">
               <img
@@ -114,7 +115,7 @@ export default function ProfileEdit() {
               Salvar
             </button>
           </form>
-        </div>
+        </MainContainer>
       )
   );
 }

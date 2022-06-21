@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import LocalLoading from '../components/LocalLoading';
 import { getUser } from '../services/userAPI';
+import { MainContainer } from '../styles/main';
 
 export default function Profile() {
   const [user, setUser] = useState({});
@@ -19,7 +20,7 @@ export default function Profile() {
   return (
     loading ? <LocalLoading />
       : (
-        <div className="page-content">
+        <MainContainer>
           <form className="user-info-area">
             <div className="user-profile-image-area">
               <img
@@ -48,7 +49,7 @@ export default function Profile() {
             </label>
             <Link to="profile/edit" className="profile-button">Editar perfil</Link>
           </form>
-        </div>
+        </MainContainer>
       )
   );
 }
