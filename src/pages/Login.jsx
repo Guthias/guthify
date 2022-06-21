@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Loading from '../components/Loading';
+import Loading from '../components/PageLoading';
 import audioPlayer from '../images/audio-player.svg';
 import { createUser } from '../services/userAPI';
 

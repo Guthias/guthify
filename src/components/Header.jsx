@@ -5,7 +5,7 @@ import { IoPerson } from 'react-icons/io5';
 import { FaMoon, FaSearch } from 'react-icons/fa';
 import useSearch from '../hooks/useSearch';
 import { getUser } from '../services/userAPI';
-import Loading from './Loading';
+import Loading from './PageLoading';
 
 const HeaderArea = styled.header`
   background-color: black;
