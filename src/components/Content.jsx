@@ -11,6 +11,7 @@ import ProfileEdit from '../pages/ProfileEdit';
 import Search from '../pages/Search';
 import Aside from './Aside';
 import Header from './Header';
+import MusicPlayer from './MusicPlayer';
 
 const loggedRoutes = ['/search', '/album/:id', '/favorites', '/profile', '/profile/edit'];
 
@@ -46,6 +47,7 @@ function Content() {
           <Route path="/profile/edit" component={ProfileEdit} />
           <Route path="*" component={NotFound} />
         </Switch>
+        <Route path={loggedRoutes} component={MusicPlayer} />
       </PageArea>
     </Container>
   );
