@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import useMusicPlayer from '../../hooks/useMusicPlayer';
 
 const TrackDetailsArea = styled.div`
   display: flex;
@@ -32,14 +33,15 @@ const TrackDetailsArea = styled.div`
 `;
 
 export default function TrackDetails() {
+  const { currentTrack } = useMusicPlayer();
   return (
     <TrackDetailsArea>
       <div className="thumbnail-area">
-        <img src="https://is5-ssl.mzstatic.com/image/thumb/Music115/v4/09/01/16/090116af-770e-23da-21a9-6bd30782eda5/00843930013562.rgb.jpg/60x60bb.jpg" alt="Capa do Album" />
+        <img src={currentTrack.thumbnail} alt="Capa do Album" />
       </div>
       <div className="track-info">
-        <span className="artist-name">Taylor Swift</span>
-        <span className="track-name">Shake It Off</span>
+        <span className="artist-name">{currentTrack.artist}</span>
+        <span className="track-name">{currentTrack.name}</span>
       </div>
     </TrackDetailsArea>
   );

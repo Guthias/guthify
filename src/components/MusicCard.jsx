@@ -2,6 +2,7 @@ import React from 'react';
 import Prototypes from 'prop-types';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import styled from 'styled-components';
+import useMusicPlayer from '../hooks/useMusicPlayer';
 
 const Track = styled.div`
   display: flex;
@@ -35,6 +36,7 @@ const Track = styled.div`
 `;
 
 export default function MusicCard({ trackDetails, toggleFavorite, isFavorited }) {
+  const { playNewTrack } = useMusicPlayer();
   const {
     previewUrl,
     trackName,
@@ -44,8 +46,12 @@ export default function MusicCard({ trackDetails, toggleFavorite, isFavorited })
     trackId,
   } = trackDetails;
 
+  const playTrack = () => {
+    playNewTrack(trackId, previewUrl, trackName, artistName, artworkUrl60);
+  };
+
   return (
-    <Track favorited={isFavorited}>
+    <Track onClick={playTrack} favorited={isFavorited}>
       <div>
         <img src={artworkUrl60} alt="" />
       </div>
@@ -60,17 +66,6 @@ export default function MusicCard({ trackDetails, toggleFavorite, isFavorited })
           }
         </button>
       </div>
-
-      <audio
-        key={previewUrl}
-        data-testid="audio-component"
-        src={previewUrl}
-        controls
-      >
-        <track kind="captions" />
-        O seu navegador não suporta o elemento
-        <code>audio</code>
-      </audio>
     </Track>
   );
 }
