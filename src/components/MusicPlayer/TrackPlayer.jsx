@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
-import { FaStepBackward, FaStepForward, FaPlay } from 'react-icons/fa';
+import {
+  FaStepBackward, FaStepForward, FaPlay, FaPause,
+} from 'react-icons/fa';
+import useMusicPlayer from '../../hooks/useMusicPlayer';
 
 const TrackArea = styled.div`
   display: flex;
@@ -76,6 +79,21 @@ const TrackArea = styled.div`
 `;
 
 export default function TrackPlayer() {
+  const { currentTrack } = useMusicPlayer();
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const audioPlayer = useRef();
+
+  const togglePlayer = () => {
+    if (audioPlayer.current.paused) {
+      audioPlayer.current.play();
+      setIsPlaying(true);
+    } else {
+      audioPlayer.current.pause();
+      setIsPlaying(false);
+    }
+  };
+
   return (
     <TrackArea>
       <div>
@@ -83,8 +101,12 @@ export default function TrackPlayer() {
           <FaStepBackward />
         </button>
 
-        <button className="play" type="button">
-          <FaPlay />
+        <button className="play" type="button" onClick={togglePlayer}>
+          {
+            isPlaying
+              ? <FaPlay />
+              : <FaPause />
+          }
         </button>
 
         <button type="button">
@@ -100,6 +122,10 @@ export default function TrackPlayer() {
           <span className="track-time">2:42</span>
         </div>
       </div>
+
+      <audio ref={audioPlayer} src={currentTrack.url}>
+        <track kind="captions" />
+      </audio>
     </TrackArea>
   );
 }
