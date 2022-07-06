@@ -4,6 +4,7 @@ import {
   FaStepBackward, FaStepForward, FaPlay, FaPause,
 } from 'react-icons/fa';
 import useMusicPlayer from '../../hooks/useMusicPlayer';
+import convertSecondsToMinutes from '../../helpers/convertSecondsToMinutes';
 
 const TrackArea = styled.div`
   display: flex;
@@ -81,16 +82,25 @@ const TrackArea = styled.div`
 export default function TrackPlayer() {
   const { currentTrack } = useMusicPlayer();
   const [isPlaying, setIsPlaying] = useState(false);
+  const [currentDuration, setcurrentDuration] = useState(0);
 
   const audioPlayer = useRef();
+  const animationRef = useRef();
+
+  const updateProgress = () => {
+    setcurrentDuration(convertSecondsToMinutes(audioPlayer?.current?.currentTime));
+    animationRef.current = requestAnimationFrame(updateProgress);
+  };
 
   const togglePlayer = () => {
     if (audioPlayer.current.paused) {
       audioPlayer.current.play();
+      animationRef.current = requestAnimationFrame(updateProgress);
       setIsPlaying(true);
     } else {
       audioPlayer.current.pause();
       setIsPlaying(false);
+      cancelAnimationFrame(animationRef.current);
     }
   };
 
@@ -116,10 +126,9 @@ export default function TrackPlayer() {
 
       <div>
         <div className="progress-bar" />
-
         <div className="track-time">
-          <span className="current-time">0:45</span>
-          <span className="track-time">2:42</span>
+          <span className="current-time">{ currentDuration }</span>
+          <span className="track-duration">{ convertSecondsToMinutes(audioPlayer?.current?.duration) }</span>
         </div>
       </div>
 
