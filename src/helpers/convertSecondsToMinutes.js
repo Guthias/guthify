@@ -2,6 +2,8 @@ function convertSecondsToTime(time) {
   const seconds = Math.round(time);
   const minutes = Math.floor(seconds / 60);
 
+  if (Number.isNaN(seconds) || Number.isNaN(minutes)) return '0:00';
+
   let formattedSeconds = seconds;
 
   if (seconds - (60 * minutes) < 10) {
