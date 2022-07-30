@@ -47,22 +47,7 @@ const TrackArea = styled.div`
   
     .progress-bar {
       width: 20em;
-      height: 0.5em;
-      background-color: gray;
-      border-radius: 0.8em;
-      margin-right: 1em;
-      position: relative;
-      overflow: hidden;
       cursor: pointer;
-
-      &:before {
-        content: '';
-        width: 35%;
-        height: 100%;
-        position: absolute;
-        z-index: 100%;
-        background-color: #147fdd;
-      }
     }
   
     .track-time {
@@ -85,10 +70,14 @@ export default function TrackPlayer() {
   const [currentDuration, setcurrentDuration] = useState(0);
 
   const audioPlayer = useRef();
+  const progressBar = useRef();
   const animationRef = useRef();
 
   const updateProgress = () => {
-    setcurrentDuration(convertSecondsToMinutes(audioPlayer?.current?.currentTime));
+    const { currentTime, duration } = audioPlayer.current;
+    const musicProgress = (100 / duration) * currentTime;
+    progressBar.current.value = musicProgress;
+    setcurrentDuration(audioPlayer.current.currentTime);
     animationRef.current = requestAnimationFrame(updateProgress);
   };
 
@@ -125,9 +114,9 @@ export default function TrackPlayer() {
       </div>
 
       <div>
-        <div className="progress-bar" />
+        <input type="range" className="progress-bar" ref={progressBar} defaultValue="0" min="0" max="100" />
         <div className="track-time">
-          <span className="current-time">{ currentDuration }</span>
+          <span className="current-time">{ convertSecondsToMinutes(currentDuration) }</span>
           <span className="track-duration">{ convertSecondsToMinutes(audioPlayer?.current?.duration) }</span>
         </div>
       </div>
